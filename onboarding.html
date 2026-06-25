@@ -497,7 +497,161 @@
   <div class="pq-footer">
     <div class="pq-footer-inner">
       <label class="pq-visible"><span class="pq-vis-check"><svg width="13" height="10" viewBox="0 0 13 10" fill="none"><path d="M1 5l4 4 7-8" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Visible on profile</label>
-      <button class="pq-next-btn inactive" id="s14-next" onclick="goTo(3)"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M5 11h12M12 6l5 5-5 5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button class="pq-next-btn inactive" id="s14-next" onclick="goTo(15)"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M5 11h12M12 6l5 5-5 5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     S15 — WHAT KEEPS YOU BUSY
+══════════════════════════════════════════ -->
+<div class="screen pq-screen" id="s15">
+  <div class="back-btn" onclick="goBack()" style="top:52px;">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M13 4l-6 6 6 6" stroke="#14161B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+  <div class="scroll-body px-main" style="padding-top:80px;padding-bottom:40px;">
+    <h1 class="pq-title">What keeps you busy these days?</h1>
+    <p class="pq-sub" style="text-align:center;">Each question is optional, but including this can give others a window into your world.</p>
+
+    <!-- Work card -->
+    <div style="background:#fff;border-radius:18px;padding:20px;margin-bottom:12px;">
+      <p style="font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:600;color:#14161B;margin:0 0 14px;">Where do you work?</p>
+      <input class="f-input" type="text" placeholder="In your own words" style="margin-bottom:14px;"/>
+      <label class="pq-visible"><span class="pq-vis-check"><svg width="13" height="10" viewBox="0 0 13 10" fill="none"><path d="M1 5l4 4 7-8" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Visible on profile</label>
+    </div>
+
+    <!-- Job title card -->
+    <div style="background:#fff;border-radius:18px;padding:20px;margin-bottom:12px;">
+      <p style="font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:600;color:#14161B;margin:0 0 6px;">What's your job title?</p>
+      <p style="font-size:13px;color:#5A6072;margin:0 0 14px;line-height:1.5;">If you're a student, you're welcome to mention that instead.</p>
+      <input class="f-input" type="text" placeholder="In your own words" style="margin-bottom:14px;"/>
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <label class="pq-visible"><span class="pq-vis-check"><svg width="13" height="10" viewBox="0 0 13 10" fill="none"><path d="M1 5l4 4 7-8" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Visible on profile</label>
+        <button class="pq-next-btn active" onclick="goTo(16)"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M5 11h12M12 6l5 5-5 5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     S16 — EDUCATION
+══════════════════════════════════════════ -->
+<div class="screen pq-screen" id="s16">
+  <div class="back-btn" onclick="goBack()" style="top:52px;">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M13 4l-6 6 6 6" stroke="#14161B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+  <div class="scroll-body px-main" style="padding-top:80px;padding-bottom:40px;">
+    <h1 class="pq-title">Your education, if you want to share</h1>
+    <p class="pq-sub" style="text-align:center;">You don't have to include it, but it might spark something familiar for someone else.</p>
+
+    <!-- Where did you study -->
+    <div style="background:#fff;border-radius:18px;padding:20px;margin-bottom:12px;">
+      <p style="font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:600;color:#14161B;margin:0 0 14px;">Where did you study?</p>
+      <input class="f-input" type="text" placeholder="Your college or university" style="margin-bottom:14px;"/>
+      <label class="pq-visible"><span class="pq-vis-check"><svg width="13" height="10" viewBox="0 0 13 10" fill="none"><path d="M1 5l4 4 7-8" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Visible on profile</label>
+    </div>
+
+    <!-- Highest level -->
+    <div style="background:#fff;border-radius:18px;padding:20px;margin-bottom:12px;">
+      <p style="font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:600;color:#14161B;margin:0 0 14px;">What's the highest level you attained?</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;">
+        <div class="chip" onclick="pick(this,'edu')">Secondary school</div>
+        <div class="chip" onclick="pick(this,'edu')">Bachelor's degree</div>
+        <div class="chip" onclick="pick(this,'edu')">Postgraduate degree</div>
+        <div class="chip" onclick="pick(this,'edu')">Prefer not to say</div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <div style="display:flex;align-items:center;gap:8px;font-size:14px;color:#5A6072;">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2 9c0 .5.1 1 .2 1.4M9 2a7 7 0 017 7 7 7 0 01-7 7 7 7 0 01-7-7" stroke="#5A6072" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="2" x2="16" y2="16" stroke="#5A6072" stroke-width="1.5" stroke-linecap="round"/></svg>
+          Hidden on profile
+        </div>
+        <button class="pq-next-btn active" onclick="goTo(17)"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M5 11h12M12 6l5 5-5 5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     S17 — HOMETOWN
+══════════════════════════════════════════ -->
+<div class="screen pq-screen" id="s17">
+  <div class="back-btn" onclick="goBack()" style="top:52px;">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M13 4l-6 6 6 6" stroke="#14161B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+  <div class="scroll-body px-main" style="padding-top:80px;padding-bottom:120px;">
+    <h1 class="pq-title">Where's your home town?</h1>
+    <p class="pq-sub" style="text-align:center;">Totally optional, although people often connect over where someone's from.</p>
+    <div style="background:#fff;border-radius:18px;padding:20px;margin-top:8px;">
+      <p style="font-size:12px;color:#9FA6B7;margin:0 0 6px;font-family:'Hanken Grotesk',sans-serif;">In your own words</p>
+      <input class="f-input" type="text" placeholder="Your hometown" style="background:#F2F3F7;"/>
+    </div>
+  </div>
+  <div class="pq-footer">
+    <div class="pq-footer-inner">
+      <label class="pq-visible"><span class="pq-vis-check"><svg width="13" height="10" viewBox="0 0 13 10" fill="none"><path d="M1 5l4 4 7-8" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Visible on profile</label>
+      <button class="pq-next-btn active" onclick="goTo(18)"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M5 11h12M12 6l5 5-5 5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     S18 — RELIGION
+══════════════════════════════════════════ -->
+<div class="screen pq-screen" id="s18">
+  <div style="display:flex;align-items:center;justify-content:center;padding:52px 28px 0;position:relative;">
+    <div class="back-btn" onclick="goBack()" style="top:52px;">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M13 4l-6 6 6 6" stroke="#14161B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <span style="font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:700;color:#14161B;letter-spacing:-0.02em;">Religion</span>
+  </div>
+  <div class="scroll-body px-main" style="padding-top:24px;padding-bottom:120px;">
+    <div id="s18-rows">
+      <div class="pq-row" onclick="pqCheck(this,'s18',1)"><span class="pq-row-label">Hindu</span><span class="pq-check"><svg width="13" height="10" viewBox="0 0 13 10" fill="none"><path d="M1 5l4 4 7-8" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+      <div class="pq-row" onclick="pqCheck(this,'s18',1)"><span class="pq-row-label">Muslim</span><span class="pq-check"><svg width="13" height="10" viewBox="0 0 13 10" fill="none"><path d="M1 5l4 4 7-8" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+      <div class="pq-row" onclick="pqCheck(this,'s18',1)"><span class="pq-row-label">Christian</span><span class="pq-check"><svg width="13" height="10" viewBox="0 0 13 10" fill="none"><path d="M1 5l4 4 7-8" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+      <div class="pq-row" onclick="pqCheck(this,'s18',1)"><span class="pq-row-label">Sikh</span><span class="pq-check"><svg width="13" height="10" viewBox="0 0 13 10" fill="none"><path d="M1 5l4 4 7-8" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+      <div class="pq-row" onclick="pqCheck(this,'s18',1)"><span class="pq-row-label">Buddhist</span><span class="pq-check"><svg width="13" height="10" viewBox="0 0 13 10" fill="none"><path d="M1 5l4 4 7-8" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+      <div class="pq-row" onclick="pqCheck(this,'s18',1)"><span class="pq-row-label">Jain</span><span class="pq-check"><svg width="13" height="10" viewBox="0 0 13 10" fill="none"><path d="M1 5l4 4 7-8" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+      <div class="pq-row" onclick="pqCheck(this,'s18',1)"><span class="pq-row-label">Agnostic</span><span class="pq-check"><svg width="13" height="10" viewBox="0 0 13 10" fill="none"><path d="M1 5l4 4 7-8" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+      <div class="pq-row" onclick="pqCheck(this,'s18',1)"><span class="pq-row-label">Atheist</span><span class="pq-check"><svg width="13" height="10" viewBox="0 0 13 10" fill="none"><path d="M1 5l4 4 7-8" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+      <div class="pq-row" onclick="pqCheck(this,'s18',1)"><span class="pq-row-label">Prefer not to say</span><span class="pq-check"><svg width="13" height="10" viewBox="0 0 13 10" fill="none"><path d="M1 5l4 4 7-8" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+    </div>
+  </div>
+  <div class="pq-footer">
+    <div class="pq-footer-inner">
+      <label class="pq-visible"><span class="pq-vis-check"><svg width="13" height="10" viewBox="0 0 13 10" fill="none"><path d="M1 5l4 4 7-8" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Visible on profile</label>
+      <button class="pq-next-btn active" onclick="goTo(19)"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M5 11h12M12 6l5 5-5 5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     S19 — POLITICAL BELIEFS
+══════════════════════════════════════════ -->
+<div class="screen pq-screen" id="s19">
+  <div class="back-btn" onclick="goBack()" style="top:52px;">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M13 4l-6 6 6 6" stroke="#14161B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+  <div class="scroll-body px-main" style="padding-top:80px;padding-bottom:120px;">
+    <h1 class="pq-title">What are your political beliefs?</h1>
+    <div id="s19-rows" style="margin-top:28px;">
+      <div class="pq-row" onclick="pqRadio(this,'s19')"><span class="pq-row-label">Liberal</span><span class="pq-radio"><span class="pq-radio-dot"></span></span></div>
+      <div class="pq-row" onclick="pqRadio(this,'s19')"><span class="pq-row-label">Moderate</span><span class="pq-radio"><span class="pq-radio-dot"></span></span></div>
+      <div class="pq-row" onclick="pqRadio(this,'s19')"><span class="pq-row-label">Conservative</span><span class="pq-radio"><span class="pq-radio-dot"></span></span></div>
+      <div class="pq-row" onclick="pqRadio(this,'s19')"><span class="pq-row-label">Not political</span><span class="pq-radio"><span class="pq-radio-dot"></span></span></div>
+      <div class="pq-row" onclick="pqRadio(this,'s19')"><span class="pq-row-label">Other</span><span class="pq-radio"><span class="pq-radio-dot"></span></span></div>
+      <div class="pq-row" onclick="pqRadio(this,'s19')" style="flex-direction:column;align-items:flex-start;gap:4px;">
+        <div style="display:flex;width:100%;align-items:center;justify-content:space-between;">
+          <span class="pq-row-label">Prefer not to say</span><span class="pq-radio"><span class="pq-radio-dot"></span></span>
+        </div>
+        <p style="font-size:12px;color:#5A6072;margin:0;">This will limit who sees your profile. <span style="text-decoration:underline;cursor:pointer;">Learn more</span></p>
+      </div>
+    </div>
+  </div>
+  <div class="pq-footer">
+    <div class="pq-footer-inner">
+      <label class="pq-visible"><span class="pq-vis-check"><svg width="13" height="10" viewBox="0 0 13 10" fill="none"><path d="M1 5l4 4 7-8" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Visible on profile</label>
+      <button class="pq-next-btn inactive" id="s19-next" onclick="goTo(3)"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M5 11h12M12 6l5 5-5 5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     </div>
   </div>
 </div>
