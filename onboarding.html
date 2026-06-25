@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>Venn — Get started</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Hanken+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: {
+        colors: {
+          'venn-blue':'#335CFF','venn-violet':'#8A5BFF',
+          'overlap-indigo':'#3A2FD6','ink':'#14161B',
+          'slate':'#5A6072','mist':'#E6E8EE',
+          'paper':'#FCFCFD','canvas':'#EDEEF2',
+        },
+        fontFamily: {
+          'display':['Space Grotesk','sans-serif'],
+          'body':['Hanken Grotesk','system-ui','sans-serif'],
+          'mono':['Space Mono','monospace'],
+        }
+      }}
+    }
+  </script>
+  <style>
+    * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #0d0d0d;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Hanken Grotesk', system-ui, sans-serif;
+    }
+
+    /* ── Phone shell (desktop) ── */
+    .shell {
+      width: 390px;
+      height: 844px;
+      border-radius: 52px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.07), 0 48px 140px rgba(0,0,0,0.85);
+      flex-shrink: 0;
+    }
+    @media (max-width: 430px) {
+      body { background: #000; align-items: flex-start; }
+      .shell { width: 100vw; height: 100dvh; border-radius: 0; box-shadow: none; }
+    }
+
+    /* ── Screen transitions ── */
+    .screen {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.36s cubic-bezier(0.4,0,0.2,1);
+      will-change: transform;
+      background: #FCFCFD;
+    }
+    .screen.active  { transform: translateX(0); }
+    .screen.exiting { transform: translateX(-30%); }
+
+    /* ── Status bar ── */
+    .status {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 16px 28px 0; flex-shrink: 0; position: relative; z-index: 5;
+    }
+    .status-time { font-family:'Space Mono',monospace; font-size:13px; font-weight:700; }
+
+    /* ── Progress bar ── */
+    .prog-track {
+      height: 3px; background: rgba(0,0,0,0.08);
+      margin: 14px 28px 0; border-radius: 2px; overflow: hidden;
+    }
+    .prog-fill {
+      height: 100%; border-radius: 2px;
+      background: linear-gradient(90deg,#335CFF,#8A5BFF);
+      transition: width 0.4s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    /* ── Back button ── */
+    .back-btn {
+      width: 40px; height: 40px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; margin: 6px 18px 0; flex-shrink: 0;
+    }
+
+    /* ── Inputs ── */
+    .f-input {
+      background: #F2F3F7; border: 2px solid transparent;
+      border-radius: 14px; padding: 17px 18px;
+      font-family: 'Hanken Grotesk', sans-serif; font-size: 16px; color: #14161B;
+      width: 100%; outline: none; transition: border-color 0.18s, background 0.18s;
+      -webkit-appearance: none; appearance: none;
+    }
+    .f-input:focus { border-color: #335CFF; background: #fff; }
+    .f-input::placeholder { color: #9FA6B7; }
+    .f-label {
+      font-family: 'Space Mono', monospace; font-size: 10px;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: #5A6072; display: block; margin-bottom: 7px;
+    }
+
+    /* ── Primary button ── */
+    .btn {
+      width: 100%; border: none; border-radius: 50px; padding: 18px;
+      font-family: 'Hanken Grotesk', sans-serif; font-size: 16px; font-weight: 600;
+      cursor: pointer; transition: opacity 0.15s, transform 0.1s; letter-spacing: -0.01em;
+    }
+    .btn:active { transform: scale(0.97); opacity: 0.85; }
+    .btn-dark { background: #14161B; color: #fff; }
+    .btn-grad { background: linear-gradient(135deg,#335CFF 0%,#8A5BFF 100%); color: #fff; }
+    .btn-outline { background: transparent; color: #14161B; border: 1.5px solid #E6E8EE; }
+    .btn-ghost { background: none; border: none; color: rgba(255,255,255,0.65); font-family:'Hanken Grotesk',sans-serif; font-size:16px; font-weight:500; cursor:pointer; width:100%; padding:16px; }
+    .btn:disabled { opacity: 0.32; pointer-events: none; }
+
+    /* ── Chips ── */
+    .chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 11px 16px; border-radius: 50px;
+      border: 1.5px solid #E6E8EE; background: #fff;
+      font-family: 'Hanken Grotesk', sans-serif; font-size: 14px; font-weight: 500;
+      color: #5A6072; cursor: pointer; transition: all 0.16s; user-select: none;
+    }
+    .chip.on { background: #335CFF; border-color: #335CFF; color: #fff; }
+    .chip.on-v { background: #8A5BFF; border-color: #8A5BFF; color: #fff; }
+
+    /* ── OTP boxes ── */
+    .otp {
+      width: 48px; height: 62px; background: #F2F3F7;
+      border: 2px solid transparent; border-radius: 14px;
+      font-family: 'Space Grotesk', sans-serif; font-size: 26px; font-weight: 600;
+      text-align: center; color: #14161B; outline: none;
+      transition: border-color 0.18s, background 0.18s;
+      -webkit-appearance: none; caret-color: #335CFF;
+    }
+    .otp:focus { border-color: #335CFF; background: #fff; }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(18px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    .fu  { animation: fadeUp 0.38s cubic-bezier(0.4,0,0.2,1) both; }
+    .d1  { animation-delay: 0.05s; }
+    .d2  { animation-delay: 0.10s; }
+    .d3  { animation-delay: 0.15s; }
+    .d4  { animation-delay: 0.20s; }
+
+    @keyframes checkDraw {
+      from { stroke-dashoffset: 80; }
+      to   { stroke-dashoffset: 0; }
+    }
+    .check-path {
+      stroke-dasharray: 80; stroke-dashoffset: 80;
+      animation: checkDraw 0.5s 0.3s ease forwards;
+    }
+    @keyframes popIn {
+      0%   { transform:scale(0.6); opacity:0; }
+      70%  { transform:scale(1.12); }
+      100% { transform:scale(1); opacity:1; }
+    }
+    .pop { animation: popIn 0.4s cubic-bezier(0.34,1.56,0.64,1) both; }
+
+    /* ── Venn mark ── */
+    .vmark { position:relative; display:inline-block; }
+    .vmark .cl, .vmark .cr {
+      position:absolute; top:0; border-radius:50%;
+    }
+    .vmark .cl { left:0; background:#335CFF; mix-blend-mode:multiply; }
+    .vmark .cr { right:0; background:#8A5BFF; mix-blend-mode:multiply; }
+
+    /* Screen-specific */
+    .scroll-body { flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch; }
+    .px-main { padding-left:28px; padding-right:28px; }
+  </style>
+</head>
+<body>
+<div class="shell" id="shell">
+
+<!-- ══════════════════════════════════════════
+     S0 — SPLASH
+══════════════════════════════════════════ -->
+<div class="screen active" id="s0" style="background:#000;">
+  <!-- Hero photo (swap src to your image) -->
+  <img
+    src="assets/hero.jpg"
+    alt=""
+    style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;"
+  />
+  <!-- Gradient overlay — heavy at bottom, lighter at top -->
+  <div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.1) 30%, rgba(0,0,0,0.55) 60%, rgba(0,0,0,0.88) 100%);"></div>
+
+  <!-- Top: logo centred -->
+  <div style="position:relative;z-index:2;padding-top:56px;display:flex;flex-direction:column;align-items:center;gap:10px;">
+    <!-- Venn mark -->
+    <div style="position:relative;width:52px;height:34px;">
+      <div style="position:absolute;left:0;top:0;width:34px;height:34px;border-radius:50%;background:#335CFF;opacity:0.92;mix-blend-mode:screen;"></div>
+      <div style="position:absolute;right:0;top:0;width:34px;height:34px;border-radius:50%;background:#8A5BFF;opacity:0.92;mix-blend-mode:screen;"></div>
+    </div>
+    <span style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:600;color:#fff;letter-spacing:-0.02em;">Venn</span>
+  </div>
+
+  <!-- Bottom content -->
+  <div style="position:relative;z-index:2;margin-top:auto;padding:0 28px 44px;">
+    <h1 style="font-family:'Space Grotesk',sans-serif;font-size:36px;font-weight:700;color:#fff;letter-spacing:-0.04em;line-height:1.1;text-align:center;margin:0 0 10px;">Find where your lives overlap.</h1>
+    <p style="font-family:'Hanken Grotesk',sans-serif;font-size:15px;color:rgba(255,255,255,0.65);text-align:center;margin:0 0 28px;line-height:1.5;">The flatmate app designed to be deleted.</p>
+
+    <!-- Legal -->
+    <p style="font-size:12px;color:rgba(255,255,255,0.4);text-align:center;line-height:1.6;margin-bottom:20px;">
+      By tapping Create account or Sign in, you agree to our <span style="color:rgba(255,255,255,0.65);text-decoration:underline;">Terms</span>. Learn how we process your data in our <span style="color:rgba(255,255,255,0.65);text-decoration:underline;">Privacy Policy</span> and <span style="color:rgba(255,255,255,0.65);text-decoration:underline;">Cookies Policy</span>.
+    </p>
+
+    <button class="btn btn-grad" onclick="goTo(1)" style="margin-bottom:12px;">Create account</button>
+    <button class="btn" onclick="goTo(1)" style="background:transparent;border:1.5px solid rgba(255,255,255,0.3);color:#fff;">Sign in</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     S1 — PHONE NUMBER
+══════════════════════════════════════════ -->
+<div class="screen" id="s1">
+  <div class="status" style="color:#14161B;"><span class="status-time">5:00</span><span style="font-family:'Space Mono',monospace;font-size:10px;color:#9FA6B7;">STEP 1 OF 5</span></div>
+  <div class="prog-track"><div class="prog-fill" style="width:20%"></div></div>
+
+  <div class="back-btn" onclick="goBack()">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M13 4l-6 6 6 6" stroke="#14161B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+
+  <div class="scroll-body px-main" style="padding-top:20px;padding-bottom:36px;">
+    <div class="fu">
+      <h1 style="font-family:'Space Grotesk',sans-serif;font-size:32px;font-weight:600;color:#14161B;letter-spacing:-0.03em;line-height:1.1;margin:0 0 8px;">What's your phone number?</h1>
+      <p style="font-size:14px;color:#5A6072;line-height:1.6;margin:0 0 32px;">We only use this to verify it's you. It won't appear on your profile.</p>
+    </div>
+
+    <div class="fu d1" style="display:flex;gap:10px;margin-bottom:10px;align-items:stretch;">
+      <!-- Country code -->
+      <div style="display:flex;align-items:center;gap:8px;background:#F2F3F7;border-radius:14px;padding:0 14px;height:56px;flex-shrink:0;cursor:pointer;">
+        <span style="font-size:20px;">🇮🇳</span>
+        <span style="font-family:'Hanken Grotesk',sans-serif;font-size:16px;font-weight:500;color:#14161B;">+91</span>
+        <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="#5A6072" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <input class="f-input" type="tel" id="phone" placeholder="Phone number" maxlength="10" style="height:56px;padding-top:0;padding-bottom:0;" oninput="document.getElementById('phone-next').disabled=this.value.replace(/\D/g,'').length<10"/>
+    </div>
+
+    <p class="fu d2" style="font-size:12px;color:#9FA6B7;text-align:center;margin-bottom:auto;margin-top:8px;">Venn will send you a verification code. Standard rates may apply.</p>
+  </div>
+
+  <div class="px-main" style="padding-bottom:40px;padding-top:12px;">
+    <button class="btn btn-dark" id="phone-next" disabled onclick="goTo(2)">Continue</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     S2 — NAME
+══════════════════════════════════════════ -->
+<div class="screen" id="s2">
+  <div class="status" style="color:#14161B;"><span class="status-time">5:00</span><span style="font-family:'Space Mono',monospace;font-size:10px;color:#9FA6B7;">STEP 2 OF 5</span></div>
+  <div class="prog-track"><div class="prog-fill" style="width:40%"></div></div>
+
+  <div class="back-btn" onclick="goBack()">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M13 4l-6 6 6 6" stroke="#14161B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+
+  <div class="scroll-body px-main" style="padding-top:20px;padding-bottom:36px;">
+    <div class="fu">
+      <h1 style="font-family:'Space Grotesk',sans-serif;font-size:32px;font-weight:600;color:#14161B;letter-spacing:-0.03em;line-height:1.1;margin:0 0 8px;">What's your name?</h1>
+      <p style="font-size:14px;color:#5A6072;line-height:1.6;margin:0 0 32px;">Venn doesn't verify names. We count on flatmates to be real with each other.</p>
+    </div>
+
+    <div class="fu d1" style="margin-bottom:14px;">
+      <label class="f-label">First name</label>
+      <input class="f-input" type="text" id="fname" placeholder="Your first name" oninput="document.getElementById('name-next').disabled=!this.value.trim()"/>
+    </div>
+    <div class="fu d2" style="margin-bottom:16px;">
+      <label class="f-label">Last name <span style="color:#9FA6B7;text-transform:none;font-family:'Hanken Grotesk',sans-serif;letter-spacing:0;">(optional)</span></label>
+      <input class="f-input" type="text" id="lname" placeholder="Your last name"/>
+    </div>
+
+    <p class="fu d3" style="font-size:12px;color:#9FA6B7;text-align:center;">Last name is optional and only shared with confirmed matches.</p>
+  </div>
+
+  <div class="px-main" style="padding-bottom:40px;padding-top:12px;">
+    <button class="btn btn-dark" id="name-next" disabled onclick="goTo(3)">Continue</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     S3 — HOW DO YOU LIVE
+══════════════════════════════════════════ -->
+<div class="screen" id="s3">
+  <div class="status" style="color:#14161B;"><span class="status-time">5:01</span><span style="font-family:'Space Mono',monospace;font-size:10px;color:#9FA6B7;">STEP 3 OF 5</span></div>
+  <div class="prog-track"><div class="prog-fill" style="width:60%"></div></div>
+
+  <div class="back-btn" onclick="goBack()">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M13 4l-6 6 6 6" stroke="#14161B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+
+  <div class="scroll-body px-main" style="padding-top:16px;padding-bottom:36px;">
+    <div class="fu">
+      <h1 style="font-family:'Space Grotesk',sans-serif;font-size:30px;font-weight:600;color:#14161B;letter-spacing:-0.03em;line-height:1.1;margin:0 0 6px;">How do you actually live?</h1>
+      <p style="font-size:14px;color:#5A6072;line-height:1.55;margin:0 0 24px;">Your honest answers find your best overlap.</p>
+    </div>
+
+    <!-- Sleep -->
+    <div class="fu d1" style="margin-bottom:20px;">
+      <p style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#5A6072;margin:0 0 10px;">Sleep schedule</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <div class="chip" onclick="pick(this,'sleep')">🌅 Early bird</div>
+        <div class="chip" onclick="pick(this,'sleep')">☀️ 9-to-5 ish</div>
+        <div class="chip" onclick="pick(this,'sleep')">🌙 Night owl</div>
+      </div>
+    </div>
+    <!-- Cleanliness -->
+    <div class="fu d2" style="margin-bottom:20px;">
+      <p style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#5A6072;margin:0 0 10px;">Cleanliness</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <div class="chip" onclick="pick(this,'clean')">😌 Relaxed</div>
+        <div class="chip" onclick="pick(this,'clean')">👌 Moderate</div>
+        <div class="chip" onclick="pick(this,'clean')">✨ Spotless</div>
+      </div>
+    </div>
+    <!-- Guests -->
+    <div class="fu d2" style="margin-bottom:20px;">
+      <p style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#5A6072;margin:0 0 10px;">Guests over</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <div class="chip" onclick="pick(this,'guests')">🙅 Rarely</div>
+        <div class="chip" onclick="pick(this,'guests')">🙋 Sometimes</div>
+        <div class="chip" onclick="pick(this,'guests')">🎉 Often</div>
+      </div>
+    </div>
+    <!-- WFH -->
+    <div class="fu d3" style="margin-bottom:28px;">
+      <p style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#5A6072;margin:0 0 10px;">Work from home</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <div class="chip" onclick="pick(this,'wfh')">🏢 Never</div>
+        <div class="chip" onclick="pick(this,'wfh')">💻 Sometimes</div>
+        <div class="chip on-v" onclick="pick(this,'wfh')">🏠 Full-time</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="px-main" style="padding-bottom:40px;padding-top:12px;">
+    <button class="btn btn-dark" id="life-next" disabled onclick="goTo(4)">Continue</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     S4 — OTP VERIFY
+══════════════════════════════════════════ -->
+<div class="screen" id="s4">
+  <div class="status" style="color:#14161B;"><span class="status-time">5:02</span><span style="font-family:'Space Mono',monospace;font-size:10px;color:#9FA6B7;">STEP 4 OF 5</span></div>
+  <div class="prog-track"><div class="prog-fill" style="width:80%"></div></div>
+
+  <div class="back-btn" onclick="goBack()">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M13 4l-6 6 6 6" stroke="#14161B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+
+  <div class="scroll-body px-main" style="padding-top:20px;padding-bottom:36px;">
+    <div class="fu">
+      <h1 style="font-family:'Space Grotesk',sans-serif;font-size:32px;font-weight:600;color:#14161B;letter-spacing:-0.03em;line-height:1.1;margin:0 0 8px;">We texted you a code</h1>
+      <p style="font-size:14px;color:#5A6072;line-height:1.6;margin:0 0 32px;">Enter the 6-digit code sent to <strong id="ph-display" style="color:#14161B;">+91 ——————</strong></p>
+    </div>
+
+    <div class="fu d1" style="display:flex;gap:8px;justify-content:center;margin-bottom:20px;">
+      <input class="otp" type="tel" maxlength="1" id="o0" oninput="oi(this,0)" onkeydown="ok(event,0)"/>
+      <input class="otp" type="tel" maxlength="1" id="o1" oninput="oi(this,1)" onkeydown="ok(event,1)"/>
+      <input class="otp" type="tel" maxlength="1" id="o2" oninput="oi(this,2)" onkeydown="ok(event,2)"/>
+      <input class="otp" type="tel" maxlength="1" id="o3" oninput="oi(this,3)" onkeydown="ok(event,3)"/>
+      <input class="otp" type="tel" maxlength="1" id="o4" oninput="oi(this,4)" onkeydown="ok(event,4)"/>
+      <input class="otp" type="tel" maxlength="1" id="o5" oninput="oi(this,5)" onkeydown="ok(event,5)"/>
+    </div>
+
+    <p class="fu d2" style="font-size:13px;color:#9FA6B7;text-align:center;">Didn't get it? <span style="color:#335CFF;cursor:pointer;font-weight:600;" onclick="resetOtp()">Resend</span></p>
+  </div>
+
+  <div class="px-main" style="padding-bottom:40px;padding-top:12px;">
+    <button class="btn btn-dark" id="otp-next" disabled onclick="goTo(5)">Verify</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     S5 — SUCCESS
+══════════════════════════════════════════ -->
+<div class="screen" id="s5" style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:48px 32px;">
+  <!-- Check circle -->
+  <div class="pop" style="width:88px;height:88px;border-radius:50%;background:linear-gradient(135deg,#335CFF,#8A5BFF);display:flex;align-items:center;justify-content:center;margin-bottom:28px;">
+    <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+      <path class="check-path" d="M9 20l8 8 14-16" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+
+  <!-- Venn mark -->
+  <div style="position:relative;width:44px;height:28px;margin:0 auto 16px;">
+    <div style="position:absolute;left:0;top:0;width:28px;height:28px;border-radius:50%;background:#335CFF;mix-blend-mode:multiply;"></div>
+    <div style="position:absolute;right:0;top:0;width:28px;height:28px;border-radius:50%;background:#8A5BFF;mix-blend-mode:multiply;"></div>
+  </div>
+
+  <h1 style="font-family:'Space Grotesk',sans-serif;font-size:40px;font-weight:700;color:#14161B;letter-spacing:-0.04em;line-height:1;margin:0 0 10px;">You're in.</h1>
+  <p style="font-size:15px;color:#5A6072;line-height:1.6;max-width:260px;margin:0 auto 36px;">We'll reach out the moment Venn launches in your city. Welcome to the overlap.</p>
+
+  <!-- What's next card -->
+  <div style="background:#F4F5F8;border-radius:20px;padding:20px;width:100%;text-align:left;margin-bottom:32px;">
+    <p style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#5A6072;margin:0 0 14px;">What's next</p>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div style="display:flex;align-items:center;gap:12px;"><span style="width:8px;height:8px;border-radius:50%;background:#335CFF;flex-shrink:0;"></span><span style="font-size:14px;color:#14161B;">Email when we launch in your city</span></div>
+      <div style="display:flex;align-items:center;gap:12px;"><span style="width:8px;height:8px;border-radius:50%;background:#8A5BFF;flex-shrink:0;"></span><span style="font-size:14px;color:#14161B;">Early access for waitlist members</span></div>
+      <div style="display:flex;align-items:center;gap:12px;"><span style="width:8px;height:8px;border-radius:50%;background:#3A2FD6;flex-shrink:0;"></span><span style="font-size:14px;color:#14161B;">Refer friends to move up the list</span></div>
+    </div>
+  </div>
+
+  <button class="btn btn-grad" onclick="window.location.href='index.html'">Back to home</button>
+</div>
+
+</div><!-- /shell -->
+
+<script>
+  let cur = 0;
+  const hist = [0];
+  const picks = {};
+
+  function goTo(n) {
+    const from = document.getElementById('s' + cur);
+    const to   = document.getElementById('s' + n);
+    if (!to) return;
+
+    if (n === 4) {
+      const ph = document.getElementById('phone')?.value || '';
+      document.getElementById('ph-display').textContent = '+91 ' + (ph || '——————');
+    }
+
+    // Replay animations
+    to.querySelectorAll('.fu').forEach(el => { el.style.animation='none'; el.offsetHeight; el.style.animation=''; });
+
+    from.classList.add('exiting');
+    to.classList.add('active');
+    setTimeout(() => from.classList.remove('active','exiting'), 380);
+
+    hist.push(n); cur = n;
+  }
+
+  function goBack() {
+    if (hist.length <= 1) return;
+    hist.pop();
+    const prev = hist[hist.length - 1];
+    const fromEl = document.getElementById('s' + cur);
+    const toEl   = document.getElementById('s' + prev);
+
+    fromEl.style.transition = 'transform 0.30s cubic-bezier(0.4,0,0.2,1)';
+    fromEl.style.transform  = 'translateX(100%)';
+    toEl.classList.add('active');
+    toEl.style.transform = 'translateX(0)';
+
+    setTimeout(() => {
+      fromEl.classList.remove('active');
+      fromEl.style.transform = '';
+      fromEl.style.transition = '';
+    }, 320);
+    cur = prev;
+  }
+
+  // Chip select (single per group)
+  function pick(el, group) {
+    el.parentElement.querySelectorAll('.chip').forEach(c => c.classList.remove('on','on-v'));
+    el.classList.add('on');
+    picks[group] = el.textContent.trim();
+    const done = ['sleep','clean','guests','wfh'].every(g => picks[g]);
+    document.getElementById('life-next').disabled = !done;
+  }
+
+  // OTP
+  function oi(el, i) {
+    el.value = el.value.replace(/\D/g,'');
+    if (el.value && i < 5) document.getElementById('o'+(i+1)).focus();
+    let full = '';
+    for (let j=0;j<6;j++) full += (document.getElementById('o'+j).value||'');
+    document.getElementById('otp-next').disabled = full.length < 6;
+  }
+  function ok(e, i) {
+    if (e.key==='Backspace' && !e.target.value && i>0) document.getElementById('o'+(i-1)).focus();
+  }
+  function resetOtp() {
+    for (let i=0;i<6;i++) document.getElementById('o'+i).value='';
+    document.getElementById('o0').focus();
+    document.getElementById('otp-next').disabled=true;
+  }
+</script>
+</body>
+</html>
