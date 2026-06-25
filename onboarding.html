@@ -1723,72 +1723,62 @@
 </div>
 
 <!-- ══════════════════════════════════════════
-     S26 — STANDOUTS (Flats available)
+     S26 — STANDOUTS (swipeable full-screen)
 ══════════════════════════════════════════ -->
-<div class="screen" id="s26" style="background:#F2F3F7;display:flex;flex-direction:column;">
+<div class="screen" id="s26" style="background:#111;display:flex;flex-direction:column;overflow:hidden;">
 
-  <!-- Top bar -->
-  <div style="flex-shrink:0;padding:52px 20px 18px;background:#F2F3F7;">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+  <!-- Compact top bar -->
+  <div style="flex-shrink:0;padding:48px 20px 14px;position:relative;z-index:5;">
+    <div style="display:flex;align-items:center;justify-content:space-between;">
       <div style="display:flex;align-items:center;gap:8px;">
-        <span style="font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:800;color:#14161B;letter-spacing:-0.03em;">Standouts</span>
-        <div style="width:20px;height:20px;border-radius:50%;background:#E6E8EE;display:flex;align-items:center;justify-content:center;cursor:pointer;">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#9AA0B2" stroke-width="2"/><path d="M12 8v4M12 16h.01" stroke="#9AA0B2" stroke-width="2" stroke-linecap="round"/></svg>
+        <span style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:800;color:#fff;letter-spacing:-0.03em;">Standouts</span>
+        <div style="width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;cursor:pointer;">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="rgba(255,255,255,0.5)" stroke-width="2"/><path d="M12 8v4M12 16h.01" stroke="rgba(255,255,255,0.5)" stroke-width="2" stroke-linecap="round"/></svg>
         </div>
       </div>
-      <!-- Roses pill -->
-      <div onclick="showRosesInfo()" style="display:flex;align-items:center;gap:8px;background:#EDE8FF;border-radius:50px;padding:10px 16px;cursor:pointer;">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-          <path d="M12 3C10 3 7 5 7 8c0 2 1 3.5 2.5 4.5C8 14 7 16 7 18c0 2 1.5 3 5 3s5-1 5-3c0-2-1-4-2.5-5.5C16 11.5 17 10 17 8c0-3-3-5-5-5z" fill="#8A5BFF" opacity="0.2"/>
-          <path d="M12 3C10 3 7 5 7 8c0 2 1 3.5 2.5 4.5C8 14 7 16 7 18c0 2 1.5 3 5 3s5-1 5-3c0-2-1-4-2.5-5.5C16 11.5 17 10 17 8c0-3-3-5-5-5z" stroke="#8A5BFF" stroke-width="1.5" stroke-linejoin="round"/>
-          <path d="M12 3v18" stroke="#8A5BFF" stroke-width="1.5" stroke-linecap="round"/>
-          <path d="M9 6c0 0 1 2 3 2s3-2 3-2" stroke="#8A5BFF" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-        <span style="font-family:'Hanken Grotesk',sans-serif;font-size:14px;font-weight:700;color:#8A5BFF;" id="roses-count">Roses (0)</span>
+      <div onclick="showRosesInfo()" style="display:flex;align-items:center;gap:7px;background:#2A1A4A;border-radius:50px;padding:9px 14px;cursor:pointer;border:1px solid rgba(138,91,255,0.35);">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 3C10 3 7 5 7 8c0 2 1 3.5 2.5 4.5C8 14 7 16 7 18c0 2 1.5 3 5 3s5-1 5-3c0-2-1-4-2.5-5.5C16 11.5 17 10 17 8c0-3-3-5-5-5z" fill="#8A5BFF" opacity="0.4"/><path d="M12 3C10 3 7 5 7 8c0 2 1 3.5 2.5 4.5C8 14 7 16 7 18c0 2 1.5 3 5 3s5-1 5-3c0-2-1-4-2.5-5.5C16 11.5 17 10 17 8c0-3-3-5-5-5z" stroke="#8A5BFF" stroke-width="1.5" stroke-linejoin="round"/><path d="M12 3v18" stroke="#8A5BFF" stroke-width="1.5" stroke-linecap="round"/><path d="M9 6c0 0 1 2 3 2s3-2 3-2" stroke="#8A5BFF" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span style="font-family:'Hanken Grotesk',sans-serif;font-size:13px;font-weight:700;color:#8A5BFF;" id="roses-count">Roses (0)</span>
       </div>
     </div>
-    <p style="font-family:'Hanken Grotesk',sans-serif;font-size:14px;color:#9AA0B2;margin:0;">People who have flats ready and waiting for a flatmate like you.</p>
   </div>
 
-  <!-- Horizontal card carousel -->
-  <div style="flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 0 20px;">
+  <!-- Full-screen swipeable card stack -->
+  <div style="flex:1;position:relative;overflow:hidden;" id="standouts-stack">
+    <!-- rendered by JS -->
+  </div>
 
-    <!-- Scrollable row -->
-    <div style="display:flex;gap:14px;overflow-x:auto;padding:4px 20px 20px;-webkit-overflow-scrolling:touch;scrollbar-width:none;" id="standouts-row">
-      <!-- cards rendered by JS -->
-    </div>
+  <!-- Dot indicators -->
+  <div id="standouts-dots" style="flex-shrink:0;display:flex;justify-content:center;gap:6px;padding:10px 0 8px;">
+    <!-- rendered by JS -->
+  </div>
 
-    <!-- Section: All Standouts (grid) -->
-    <div style="padding:0 20px;">
-      <div style="font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:700;color:#14161B;margin-bottom:14px;letter-spacing:-0.02em;">More flats near you</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;" id="standouts-grid">
-        <!-- rendered by JS -->
-      </div>
-    </div>
-
+  <!-- Action buttons -->
+  <div style="flex-shrink:0;display:flex;justify-content:center;align-items:center;gap:24px;padding:10px 0 12px;">
+    <button onclick="standoutPass()" style="width:58px;height:58px;border-radius:50%;background:rgba(255,255,255,0.1);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg>
+    </button>
+    <button onclick="standoutRose()" style="width:70px;height:70px;border-radius:50%;background:linear-gradient(135deg,#8A5BFF,#5B3FD6);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 6px 24px rgba(138,91,255,0.5);">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M12 3C10 3 7 5 7 8c0 2 1 3.5 2.5 4.5C8 14 7 16 7 18c0 2 1.5 3 5 3s5-1 5-3c0-2-1-4-2.5-5.5C16 11.5 17 10 17 8c0-3-3-5-5-5z" fill="#fff" opacity="0.4"/><path d="M12 3C10 3 7 5 7 8c0 2 1 3.5 2.5 4.5C8 14 7 16 7 18c0 2 1.5 3 5 3s5-1 5-3c0-2-1-4-2.5-5.5C16 11.5 17 10 17 8c0-3-3-5-5-5z" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/><path d="M12 3v18" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/><path d="M9 6c0 0 1 2 3 2s3-2 3-2" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </button>
   </div>
 
   <!-- Bottom nav -->
-  <div style="flex-shrink:0;background:#fff;border-top:1px solid #E6E8EE;display:flex;justify-content:space-around;align-items:center;padding:10px 0 24px;">
+  <div style="flex-shrink:0;background:rgba(0,0,0,0.5);border-top:1px solid rgba(255,255,255,0.08);display:flex;justify-content:space-around;align-items:center;padding:10px 0 24px;">
     <div onclick="goTo(25)" style="display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;opacity:0.35;">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 12l9-9 9 9M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9" stroke="#14161B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 12l9-9 9 9M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </div>
     <div style="display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="#8A5BFF" stroke="#8A5BFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      
     </div>
     <div onclick="goTo(27)" style="display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;opacity:0.35;">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" stroke="#14161B" stroke-width="1.8"/></svg>
-      
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" stroke="#fff" stroke-width="1.8"/></svg>
     </div>
     <div style="display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;opacity:0.35;">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="#14161B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </div>
     <div style="display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;opacity:0.35;">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" stroke="#14161B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="7" r="4" stroke="#14161B" stroke-width="1.8"/></svg>
-      
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="7" r="4" stroke="#fff" stroke-width="1.8"/></svg>
     </div>
   </div>
 
@@ -2323,62 +2313,109 @@
 
   const roseSVG = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 3C10 3 7 5 7 8c0 2 1 3.5 2.5 4.5C8 14 7 16 7 18c0 2 1.5 3 5 3s5-1 5-3c0-2-1-4-2.5-5.5C16 11.5 17 10 17 8c0-3-3-5-5-5z" fill="#8A5BFF" opacity="0.25"/><path d="M12 3C10 3 7 5 7 8c0 2 1 3.5 2.5 4.5C8 14 7 16 7 18c0 2 1.5 3 5 3s5-1 5-3c0-2-1-4-2.5-5.5C16 11.5 17 10 17 8c0-3-3-5-5-5z" stroke="#8A5BFF" stroke-width="1.5" stroke-linejoin="round"/><path d="M12 3v18" stroke="#8A5BFF" stroke-width="1.5" stroke-linecap="round"/><path d="M9 6c0 0 1 2 3 2s3-2 3-2" stroke="#8A5BFF" stroke-width="1.5" stroke-linecap="round"/></svg>`;
 
-  function initStandouts() {
-    // Hero carousel (first 3)
-    const row = document.getElementById('standouts-row');
-    row.innerHTML = standoutProfiles.slice(0, 3).map((p, i) => `
-      <div style="flex-shrink:0;width:240px;border-radius:24px;overflow:hidden;background:#fff;box-shadow:0 4px 20px rgba(0,0,0,0.09);position:relative;">
-        <div style="position:relative;">
-          <img src="${p.photo}" style="width:240px;height:300px;object-fit:cover;object-position:${p.photoPos};display:block;"/>
-          <div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(0,0,0,0.28) 0%, rgba(0,0,0,0) 45%);"></div>
-          <div style="position:absolute;top:14px;left:14px;display:flex;align-items:center;gap:6px;">
-            <span style="font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;color:#fff;letter-spacing:-0.01em;">${p.name}</span>
-            ${p.verified ? `<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#8A5BFF"/><path d="M8 12l3 3 5-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>` : ''}
-          </div>
-          <div style="position:absolute;top:14px;right:14px;background:rgba(0,0,0,0.35);backdrop-filter:blur(6px);border-radius:50px;padding:4px 10px;">
-            <span style="font-family:'Hanken Grotesk',sans-serif;font-size:11px;font-weight:700;color:#fff;">${p.rent}</span>
-          </div>
-        </div>
-        <div style="padding:16px 16px 14px;">
-          <div style="font-family:'Hanken Grotesk',sans-serif;font-size:12px;color:#9AA0B2;margin-bottom:6px;">${p.prompt}</div>
-          <div style="font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:700;color:#14161B;line-height:1.3;margin-bottom:14px;">${p.answer}</div>
-          <div style="display:flex;align-items:center;justify-content:space-between;">
-            <div style="display:flex;align-items:center;gap:5px;">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="#9AA0B2" stroke-width="1.5"/><circle cx="12" cy="10" r="3" stroke="#9AA0B2" stroke-width="1.5"/></svg>
-              <span style="font-family:'Hanken Grotesk',sans-serif;font-size:12px;color:#9AA0B2;">${p.area}</span>
-            </div>
-            <button onclick="openRoseSheet('${p.name}')" id="rose-btn-${i}" style="display:flex;align-items:center;gap:6px;background:#EDE8FF;border:none;border-radius:50px;padding:8px 14px;cursor:pointer;transition:all 0.15s;">
-              ${roseSVG}
-              <span style="font-family:'Hanken Grotesk',sans-serif;font-size:13px;font-weight:700;color:#8A5BFF;">Rose</span>
-            </button>
-          </div>
-        </div>
-      </div>`).join('');
+  let soIdx = 0; // current standout index
 
-    // Grid (remaining)
-    const grid = document.getElementById('standouts-grid');
-    grid.innerHTML = standoutProfiles.slice(3).map((p, i) => `
-      <div style="border-radius:20px;overflow:hidden;background:#fff;box-shadow:0 2px 12px rgba(0,0,0,0.07);">
-        <div style="position:relative;">
-          <img src="${p.photo}" style="width:100%;height:160px;object-fit:cover;object-position:${p.photoPos};display:block;"/>
-          <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.32) 0%,rgba(0,0,0,0) 50%);"></div>
-          <div style="position:absolute;top:10px;left:10px;display:flex;align-items:center;gap:4px;">
-            <span style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;color:#fff;">${p.name}</span>
-            ${p.verified ? `<svg width="13" height="13" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#8A5BFF"/><path d="M8 12l3 3 5-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>` : ''}
+  function initStandouts() {
+    soIdx = 0;
+    renderStandoutCard();
+    renderStandoutDots();
+    setupStandoutSwipe();
+  }
+
+  function renderStandoutCard() {
+    const stack = document.getElementById('standouts-stack');
+    if (!stack) return;
+    const p = standoutProfiles[soIdx];
+    stack.innerHTML = `
+      <div id="so-card" style="position:absolute;inset:0;border-radius:20px;overflow:hidden;margin:0 14px;cursor:grab;user-select:none;touch-action:pan-y;">
+        <img src="${p.photo}" style="width:100%;height:100%;object-fit:cover;object-position:${p.photoPos};display:block;pointer-events:none;"/>
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.18) 50%,rgba(0,0,0,0) 75%);"></div>
+        <!-- swipe indicators -->
+        <div id="so-nope" style="position:absolute;top:36px;left:24px;border:3px solid #FF4D6A;border-radius:8px;padding:6px 14px;opacity:0;transform:rotate(-15deg);transition:opacity 0.1s;">
+          <span style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:800;color:#FF4D6A;letter-spacing:0.04em;">NOPE</span>
+        </div>
+        <div id="so-rose" style="position:absolute;top:36px;right:24px;border:3px solid #8A5BFF;border-radius:8px;padding:6px 14px;opacity:0;transform:rotate(15deg);transition:opacity 0.1s;">
+          <span style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:800;color:#8A5BFF;letter-spacing:0.04em;">ROSE 🌹</span>
+        </div>
+        <!-- Info overlay -->
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:20px 20px 18px;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+            <span style="font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:800;color:#fff;letter-spacing:-0.02em;">${p.name}</span>
+            <span style="font-family:'Hanken Grotesk',sans-serif;font-size:20px;font-weight:400;color:rgba(255,255,255,0.75);">${p.age}</span>
+            ${p.verified ? `<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#8A5BFF"/><path d="M8 12l3 3 5-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>` : ''}
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;margin-bottom:12px;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="rgba(255,255,255,0.6)" stroke-width="1.8"/><circle cx="12" cy="10" r="3" stroke="rgba(255,255,255,0.6)" stroke-width="1.8"/></svg>
+            <span style="font-family:'Hanken Grotesk',sans-serif;font-size:13px;color:rgba(255,255,255,0.7);">${p.area}</span>
+            <span style="font-family:'Hanken Grotesk',sans-serif;font-size:13px;color:rgba(255,255,255,0.4);">·</span>
+            <span style="font-family:'Hanken Grotesk',sans-serif;font-size:13px;font-weight:700;color:#C4AAFF;">${p.rent}</span>
+          </div>
+          <div style="background:rgba(255,255,255,0.1);backdrop-filter:blur(10px);border-radius:14px;padding:14px 16px;border:1px solid rgba(255,255,255,0.12);">
+            <div style="font-family:'Hanken Grotesk',sans-serif;font-size:11px;color:rgba(255,255,255,0.5);margin-bottom:5px;text-transform:uppercase;letter-spacing:0.05em;">${p.prompt}</div>
+            <div style="font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:700;color:#fff;line-height:1.35;">${p.answer}</div>
           </div>
         </div>
-        <div style="padding:12px;">
-          <div style="font-family:'Hanken Grotesk',sans-serif;font-size:11px;color:#9AA0B2;margin-bottom:4px;">${p.prompt}</div>
-          <div style="font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;color:#14161B;line-height:1.35;margin-bottom:10px;">${p.answer}</div>
-          <div style="display:flex;align-items:center;justify-content:space-between;">
-            <span style="font-family:'Hanken Grotesk',sans-serif;font-size:11px;color:#9AA0B2;">${p.area}</span>
-            <button onclick="openRoseSheet('${p.name}')" style="display:flex;align-items:center;gap:4px;background:#EDE8FF;border:none;border-radius:50px;padding:6px 10px;cursor:pointer;">
-              ${roseSVG}
-              <span style="font-family:'Hanken Grotesk',sans-serif;font-size:11px;font-weight:700;color:#8A5BFF;">Rose</span>
-            </button>
-          </div>
-        </div>
-      </div>`).join('');
+      </div>`;
+  }
+
+  function renderStandoutDots() {
+    const dots = document.getElementById('standouts-dots');
+    if (!dots) return;
+    dots.innerHTML = standoutProfiles.map((_, i) =>
+      `<div style="width:${i===soIdx?20:6}px;height:6px;border-radius:3px;background:${i===soIdx?'#8A5BFF':'rgba(255,255,255,0.25)'};transition:all 0.25s;"></div>`
+    ).join('');
+  }
+
+  function standoutAdvance(liked) {
+    if (liked) openRoseSheet(standoutProfiles[soIdx].name);
+    soIdx = (soIdx + 1) % standoutProfiles.length;
+    renderStandoutCard();
+    renderStandoutDots();
+    setupStandoutSwipe();
+  }
+
+  function standoutPass() { standoutAdvance(false); }
+  function standoutRose() { standoutAdvance(true); }
+
+  function setupStandoutSwipe() {
+    const card = document.getElementById('so-card');
+    if (!card) return;
+    let startX = 0, dx = 0, dragging = false;
+
+    function onStart(x) { startX = x; dragging = true; card.style.transition = 'none'; }
+    function onMove(x) {
+      if (!dragging) return;
+      dx = x - startX;
+      const rot = dx * 0.08;
+      card.style.transform = `translateX(${dx}px) rotate(${rot}deg)`;
+      const nope = document.getElementById('so-nope');
+      const rose = document.getElementById('so-rose');
+      if (nope) nope.style.opacity = dx < -20 ? Math.min(1, (-dx - 20) / 80) : 0;
+      if (rose) rose.style.opacity = dx > 20 ? Math.min(1, (dx - 20) / 80) : 0;
+    }
+    function onEnd() {
+      if (!dragging) return;
+      dragging = false;
+      card.style.transition = 'transform 0.35s cubic-bezier(0.4,0,0.2,1)';
+      if (dx > 90) {
+        card.style.transform = `translateX(140%) rotate(20deg)`;
+        setTimeout(() => standoutAdvance(true), 300);
+      } else if (dx < -90) {
+        card.style.transform = `translateX(-140%) rotate(-20deg)`;
+        setTimeout(() => standoutAdvance(false), 300);
+      } else {
+        card.style.transform = '';
+        dx = 0;
+      }
+    }
+
+    card.addEventListener('touchstart', e => onStart(e.touches[0].clientX), {passive:true});
+    card.addEventListener('touchmove', e => onMove(e.touches[0].clientX), {passive:true});
+    card.addEventListener('touchend', onEnd);
+    card.addEventListener('mousedown', e => onStart(e.clientX));
+    card.addEventListener('mousemove', e => { if (dragging) onMove(e.clientX); });
+    card.addEventListener('mouseup', onEnd);
+    card.addEventListener('mouseleave', onEnd);
   }
 
   function openRoseSheet(name) {
