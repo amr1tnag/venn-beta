@@ -650,29 +650,11 @@
       return;
     }
 
-    // Hidden iframe + form — bypasses CORS entirely, works 100% of the time
-    const iframe = document.createElement('iframe');
-    iframe.name = 'venn-submit-frame';
-    iframe.style.display = 'none';
-    document.body.appendChild(iframe);
-
-    const form = document.createElement('form');
-    form.method = 'GET';
-    form.action = SHEETS_URL;
-    form.target = 'venn-submit-frame';
-    const input = document.createElement('input');
-    input.name = 'email';
-    input.value = email;
-    form.appendChild(input);
-    document.body.appendChild(form);
-    form.submit();
-
-    setTimeout(() => {
-      form.remove();
-      iframe.remove();
-    }, 3000);
-
-    // Show success immediately
+    try {
+      await fetch(SHEETS_URL + '?email=' + encodeURIComponent(email));
+    } catch(err) {
+      // CORS error on response is fine — the request still reached Apps Script
+    }
     formEl.style.display = 'none';
     successEl.classList.remove('hidden');
     successEl.style.display = 'flex';
