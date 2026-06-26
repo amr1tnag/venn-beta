@@ -2704,10 +2704,17 @@
   const _splash = document.getElementById('venn-splash');
   if (_splash) setTimeout(() => _splash.remove(), 2800);
 
+  // yourPrompt/yourAnswer = YOUR content they liked; prompt/answer = their own profile content
   const likesData = [
-    { name: 'Priya',  age: 24, photo: 'hero.jpeg',      photoPos: 'center top',    likedWhat: 'Liked your profile', area: 'Bandra West',  rent: '₹16k / mo', prompt: 'The thing I can\'t live without', answer: 'Masala chai, balcony plants, and zero plans on Sundays' },
-    { name: 'Ananya', age: 26, photo: 'notif-bg.jpeg',  photoPos: 'center center', likedWhat: 'Liked your answer',  area: 'Andheri West', rent: '₹20k / mo', prompt: 'My ideal flatmate does this', answer: 'Leaves the kitchen spotless and respects quiet hours after 11' },
-    { name: 'Meera',  age: 23, photo: 'hero.jpeg',      photoPos: 'center 30%',    likedWhat: 'Liked your photo',   area: 'Powai',         rent: '₹14k / mo', prompt: 'Living with me means', answer: 'Good vibes, shared groceries, and Netflix on Fridays' },
+    { name: 'Priya',  age: 24, photo: 'hero.jpeg',     photoPos: 'center top',    likedWhat: 'Liked your answer', area: 'Bandra West',  rent: '₹16k / mo',
+      yourPrompt: 'The thing I can\'t live without', yourAnswer: 'Masala chai, balcony plants, and zero plans on Sundays',
+      prompt: 'My ideal flatmate does this', answer: 'Shows up for movie nights and keeps the kitchen clean after midnight cooking' },
+    { name: 'Ananya', age: 26, photo: 'notif-bg.jpeg', photoPos: 'center center', likedWhat: 'Liked your answer', area: 'Andheri West', rent: '₹20k / mo',
+      yourPrompt: 'I\'m looking for a flatmate who', yourAnswer: 'Keeps the vibe calm, doesn\'t mind sharing groceries, and laughs easily',
+      prompt: 'Living with me means', answer: 'Spontaneous dinners, clean counters, and never fighting over the thermostat' },
+    { name: 'Meera',  age: 23, photo: 'hero.jpeg',     photoPos: 'center 30%',    likedWhat: 'Liked your photo',  area: 'Powai',        rent: '₹14k / mo',
+      yourPrompt: null, yourAnswer: null,
+      prompt: 'The thing I can\'t live without', answer: 'A balcony, good wifi, and a flatmate who gets it' },
   ];
   let _activeLikeIdx = null;
 
@@ -2860,9 +2867,9 @@
   }
 
   function openChatFromLike(p) {
-    // Pre-seed chat history with their liked action as a special card entry
+    // Show YOUR content that they liked, not their profile content
     _chatHistory[p.name] = [
-      { type: 'liked-action', likedWhat: p.likedWhat, prompt: p.prompt, answer: p.answer },
+      { type: 'liked-action', likedWhat: p.likedWhat, prompt: p.yourPrompt, answer: p.yourAnswer, photo: p.yourPrompt ? null : p.photo, photoPos: p.photoPos },
     ];
     openChat(p.name, p.age, p.photo, p.photoPos);
   }
@@ -2968,12 +2975,17 @@
     const msgs = _chatHistory[_chatWith] || [];
     document.getElementById('chat-panel').innerHTML = msgs.map(m => {
       if (m.type === 'liked-action') {
+        const contentCard = m.prompt
+          ? `<div style="background:#F8F9FB;border-radius:16px;padding:14px 16px;width:100%;box-sizing:border-box;margin-bottom:10px;">
+               <div style="font-family:'Hanken Grotesk',sans-serif;font-size:10px;color:#9AA0B2;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;">${m.prompt}</div>
+               <div style="font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:700;color:#14161B;line-height:1.4;">"${m.answer}"</div>
+             </div>`
+          : `<div style="border-radius:16px;overflow:hidden;width:100%;margin-bottom:10px;">
+               <img src="${m.photo}" style="width:100%;height:180px;object-fit:cover;object-position:${m.photoPos};display:block;"/>
+             </div>`;
         return `
         <div style="display:flex;flex-direction:column;align-items:center;margin:16px 0 20px;">
-          <div style="background:#F8F9FB;border-radius:16px;padding:14px 16px;width:100%;box-sizing:border-box;margin-bottom:10px;">
-            <div style="font-family:'Hanken Grotesk',sans-serif;font-size:10px;color:#9AA0B2;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;">${m.prompt}</div>
-            <div style="font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:700;color:#14161B;line-height:1.4;">"${m.answer}"</div>
-          </div>
+          ${contentCard}
           <div style="display:flex;align-items:center;gap:6px;background:#EEF2FF;border-radius:50px;padding:7px 14px;">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" fill="#335CFF"/></svg>
             <span style="font-family:'Hanken Grotesk',sans-serif;font-size:12px;font-weight:600;color:#335CFF;">${m.likedWhat}</span>
