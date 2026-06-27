@@ -1218,38 +1218,38 @@
 <div class="screen" id="s25" style="background:#F2F3F7;display:flex;flex-direction:column;overflow:hidden;">
 
   <!-- Sticky top bar -->
-  <div style="flex-shrink:0;background:#F2F3F7;padding:52px 20px 0;position:relative;z-index:10;">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+  <div style="flex-shrink:0;background:#F2F3F7;padding:40px 20px 0;position:relative;z-index:10;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
       <div style="display:flex;align-items:center;gap:8px;">
         <div style="position:relative;width:36px;height:22px;">
           <div style="position:absolute;left:0;top:0;width:22px;height:22px;border-radius:50%;background:#335CFF;opacity:0.9;mix-blend-mode:multiply;"></div>
           <div style="position:absolute;right:0;top:0;width:22px;height:22px;border-radius:50%;background:#8A5BFF;opacity:0.9;mix-blend-mode:multiply;"></div>
         </div>
-        <span style="font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:700;color:#14161B;letter-spacing:-0.02em;">Venn</span>
+        <span style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:800;color:#14161B;letter-spacing:-0.03em;">Venn</span>
       </div>
       <div onclick="openPreferences()" style="width:38px;height:38px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 6px rgba(0,0,0,0.08);cursor:pointer;">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18M7 12h10M10 18h4" stroke="#14161B" stroke-width="2" stroke-linecap="round"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M7 12h10M10 18h4" stroke="#14161B" stroke-width="2" stroke-linecap="round"/></svg>
       </div>
     </div>
-    <div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:14px;-webkit-overflow-scrolling:touch;scrollbar-width:none;">
-      <div style="display:flex;align-items:center;gap:6px;background:#fff;border-radius:50px;padding:8px 14px;white-space:nowrap;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,0.07);flex-shrink:0;">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="7" r="4" stroke="#14161B" stroke-width="2"/><circle cx="17" cy="9" r="3" stroke="#14161B" stroke-width="2"/><path d="M1 21v-2a7 7 0 0114 0v2" stroke="#14161B" stroke-width="2" stroke-linecap="round"/><path d="M23 21v-1.5a4 4 0 00-3-3.87" stroke="#14161B" stroke-width="2" stroke-linecap="round"/></svg>
-        <span style="font-family:'Hanken Grotesk',sans-serif;font-size:13px;font-weight:600;color:#14161B;">Signals</span>
-      </div>
-      <div style="display:flex;align-items:center;gap:4px;background:#14161B;border-radius:50px;padding:8px 14px;white-space:nowrap;cursor:pointer;flex-shrink:0;">
-        <span style="font-family:'Hanken Grotesk',sans-serif;font-size:13px;font-weight:600;color:#fff;">Location</span>
+    <div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:12px;-webkit-overflow-scrolling:touch;scrollbar-width:none;">
+      <div onclick="openPreferences()" style="display:flex;align-items:center;gap:4px;background:#14161B;border-radius:50px;padding:8px 14px;white-space:nowrap;cursor:pointer;flex-shrink:0;">
+        <span style="font-family:'Hanken Grotesk',sans-serif;font-size:13px;font-weight:600;color:#fff;">Area</span>
         <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
-      <div style="display:flex;align-items:center;gap:4px;background:#fff;border-radius:50px;padding:8px 14px;white-space:nowrap;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,0.07);flex-shrink:0;">
+      <div onclick="openPreferences()" style="display:flex;align-items:center;gap:4px;background:#fff;border-radius:50px;padding:8px 14px;white-space:nowrap;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,0.07);flex-shrink:0;">
         <span style="font-family:'Hanken Grotesk',sans-serif;font-size:13px;font-weight:600;color:#14161B;">Budget</span>
         <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="#14161B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
-      <div style="display:flex;align-items:center;gap:4px;background:#fff;border-radius:50px;padding:8px 14px;white-space:nowrap;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,0.07);flex-shrink:0;">
-        <span style="font-family:'Hanken Grotesk',sans-serif;font-size:13px;font-weight:600;color:#14161B;">Age</span>
+      <div onclick="openPreferences()" style="display:flex;align-items:center;gap:4px;background:#fff;border-radius:50px;padding:8px 14px;white-space:nowrap;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,0.07);flex-shrink:0;">
+        <span style="font-family:'Hanken Grotesk',sans-serif;font-size:13px;font-weight:600;color:#14161B;">Flat type</span>
         <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="#14161B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
-      <div style="display:flex;align-items:center;gap:4px;background:#fff;border-radius:50px;padding:8px 14px;white-space:nowrap;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,0.07);flex-shrink:0;">
+      <div onclick="openPreferences()" style="display:flex;align-items:center;gap:4px;background:#fff;border-radius:50px;padding:8px 14px;white-space:nowrap;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,0.07);flex-shrink:0;">
         <span style="font-family:'Hanken Grotesk',sans-serif;font-size:13px;font-weight:600;color:#14161B;">Move-in</span>
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="#14161B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div onclick="openPreferences()" style="display:flex;align-items:center;gap:4px;background:#fff;border-radius:50px;padding:8px 14px;white-space:nowrap;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,0.07);flex-shrink:0;">
+        <span style="font-family:'Hanken Grotesk',sans-serif;font-size:13px;font-weight:600;color:#14161B;">Gender</span>
         <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="#14161B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
     </div>
@@ -1471,26 +1471,29 @@
 
 <!-- Flatmate Preferences modal -->
 <div id="prefs-modal" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,0.45);" onclick="closePreferences(event)">
-  <div id="prefs-sheet" style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:#fff;border-radius:24px 24px 0 0;max-height:90vh;display:flex;flex-direction:column;">
+  <div id="prefs-sheet" style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:#fff;border-radius:24px 24px 0 0;max-height:92vh;display:flex;flex-direction:column;" onclick="event.stopPropagation()">
     <!-- Handle + header -->
     <div style="flex-shrink:0;padding:16px 20px 0;">
       <div style="width:40px;height:4px;background:#E6E8EE;border-radius:2px;margin:0 auto 16px;"></div>
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
-        <span style="font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;color:#14161B;">Flatmate Preferences</span>
+        <span style="font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;color:#14161B;">Preferences</span>
         <div onclick="closePreferences(null)" style="cursor:pointer;width:32px;height:32px;border-radius:50%;background:#F2F3F7;display:flex;align-items:center;justify-content:center;">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke="#14161B" stroke-width="2" stroke-linecap="round"/></svg>
         </div>
       </div>
-      <p style="font-family:'Hanken Grotesk',sans-serif;font-size:13px;color:#9AA0B2;margin:0 0 16px;">These help us show you the right people.</p>
+      <p style="font-family:'Hanken Grotesk',sans-serif;font-size:13px;color:#9AA0B2;margin:0 0 16px;">Set what you need — we'll show you the right matches.</p>
       <div style="height:1px;background:#F0F1F5;margin:0 -20px;"></div>
     </div>
 
     <!-- Scrollable content -->
     <div style="flex:1;overflow-y:auto;padding:0 20px 32px;">
 
-      <div style="font-family:'Space Mono',monospace;font-size:10px;color:#9AA0B2;letter-spacing:0.08em;text-transform:uppercase;padding:18px 0 6px;">Member preferences</div>
+      <!-- ── Section 1: About Your Flat ── -->
+      <div style="display:flex;align-items:center;gap:8px;padding:18px 0 8px;">
+        <span style="font-family:'Space Mono',monospace;font-size:10px;color:#9AA0B2;letter-spacing:0.08em;text-transform:uppercase;">About Your Flat</span>
+        <div style="flex:1;height:1px;background:#F0F1F5;"></div>
+      </div>
 
-      <!-- Each pref row: click to toggle chips below -->
       <div class="pref-row" onclick="togglePref('pref-role')">
         <div><div class="pref-title">I am</div><div class="pref-val" id="pref-role-val">Not set</div></div>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#9AA0B2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -1501,7 +1504,7 @@
       </div>
 
       <div class="pref-row" onclick="togglePref('pref-areas')">
-        <div><div class="pref-title">Areas I\'m open to</div><div class="pref-val" id="pref-areas-val">Open to all</div></div>
+        <div><div class="pref-title">Preferred areas</div><div class="pref-val" id="pref-areas-val">Open to all</div></div>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#9AA0B2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
       <div id="pref-areas" class="pref-opts" style="display:none;">
@@ -1513,10 +1516,39 @@
         <div class="chip" onclick="prefSelect(this,'pref-areas','areas',true);event.stopPropagation()">Dadar</div>
         <div class="chip" onclick="prefSelect(this,'pref-areas','areas',true);event.stopPropagation()">Malad</div>
         <div class="chip" onclick="prefSelect(this,'pref-areas','areas',true);event.stopPropagation()">Goregaon</div>
+        <div class="chip" onclick="prefSelect(this,'pref-areas','areas',true);event.stopPropagation()">Borivali</div>
         <div class="chip" onclick="prefSelect(this,'pref-areas','areas',true);event.stopPropagation()">Thane</div>
         <div class="chip" onclick="prefSelect(this,'pref-areas','areas',true);event.stopPropagation()">Navi Mumbai</div>
-        <div class="chip" onclick="prefSelect(this,'pref-areas','areas',true);event.stopPropagation()">Pune</div>
         <div class="chip" onclick="prefSelect(this,'pref-areas','areas',true);event.stopPropagation()">Vile Parle</div>
+        <div class="chip" onclick="prefSelect(this,'pref-areas','areas',true);event.stopPropagation()">Pune</div>
+        <div class="chip" onclick="prefSelect(this,'pref-areas','areas',true);event.stopPropagation()">Kothrud</div>
+        <div class="chip" onclick="prefSelect(this,'pref-areas','areas',true);event.stopPropagation()">Hinjewadi</div>
+      </div>
+
+      <div class="pref-row" onclick="togglePref('pref-flattype')">
+        <div><div class="pref-title">Flat / room type</div><div class="pref-val" id="pref-flattype-val">Open to all</div></div>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#9AA0B2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div id="pref-flattype" class="pref-opts" style="display:none;">
+        <div class="chip" onclick="prefSelect(this,'pref-flattype','flattype',true);event.stopPropagation()">1 BHK</div>
+        <div class="chip" onclick="prefSelect(this,'pref-flattype','flattype',true);event.stopPropagation()">2 BHK</div>
+        <div class="chip" onclick="prefSelect(this,'pref-flattype','flattype',true);event.stopPropagation()">3 BHK</div>
+        <div class="chip" onclick="prefSelect(this,'pref-flattype','flattype',true);event.stopPropagation()">Studio</div>
+        <div class="chip" onclick="prefSelect(this,'pref-flattype','flattype',true);event.stopPropagation()">Private room</div>
+        <div class="chip" onclick="prefSelect(this,'pref-flattype','flattype',true);event.stopPropagation()">Shared room</div>
+        <div class="chip" onclick="prefSelect(this,'pref-flattype','flattype',true);event.stopPropagation()">PG</div>
+      </div>
+
+      <div class="pref-row" onclick="togglePref('pref-budget')">
+        <div><div class="pref-title">Monthly budget</div><div class="pref-val" id="pref-budget-val">Open to all</div></div>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#9AA0B2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div id="pref-budget" class="pref-opts" style="display:none;">
+        <div class="chip" onclick="prefSelect(this,'pref-budget','budget',false);event.stopPropagation()">Under ₹10k</div>
+        <div class="chip" onclick="prefSelect(this,'pref-budget','budget',false);event.stopPropagation()">₹10k–20k</div>
+        <div class="chip" onclick="prefSelect(this,'pref-budget','budget',false);event.stopPropagation()">₹20k–35k</div>
+        <div class="chip" onclick="prefSelect(this,'pref-budget','budget',false);event.stopPropagation()">₹35k–50k</div>
+        <div class="chip" onclick="prefSelect(this,'pref-budget','budget',false);event.stopPropagation()">₹50k+</div>
       </div>
 
       <div class="pref-row" onclick="togglePref('pref-movein')">
@@ -1532,21 +1564,48 @@
         <div class="chip" onclick="prefSelect(this,'pref-movein','movein',false);event.stopPropagation()">Flexible</div>
       </div>
 
-      <div class="pref-row" onclick="togglePref('pref-flattype')">
-        <div><div class="pref-title">Flat / room type</div><div class="pref-val" id="pref-flattype-val">Open to all</div></div>
+      <!-- ── Section 2: About Your Flatmate ── -->
+      <div style="display:flex;align-items:center;gap:8px;padding:20px 0 8px;">
+        <span style="font-family:'Space Mono',monospace;font-size:10px;color:#9AA0B2;letter-spacing:0.08em;text-transform:uppercase;">About Your Flatmate</span>
+        <div style="flex:1;height:1px;background:#F0F1F5;"></div>
+      </div>
+
+      <div class="pref-row" onclick="togglePref('pref-gender')">
+        <div><div class="pref-title">Gender preference</div><div class="pref-val" id="pref-gender-val">Open to all</div></div>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#9AA0B2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
-      <div id="pref-flattype" class="pref-opts" style="display:none;">
-        <div class="chip" onclick="prefSelect(this,'pref-flattype','flattype',true);event.stopPropagation()">1 BHK</div>
-        <div class="chip" onclick="prefSelect(this,'pref-flattype','flattype',true);event.stopPropagation()">2 BHK</div>
-        <div class="chip" onclick="prefSelect(this,'pref-flattype','flattype',true);event.stopPropagation()">3 BHK</div>
-        <div class="chip" onclick="prefSelect(this,'pref-flattype','flattype',true);event.stopPropagation()">Private room</div>
-        <div class="chip" onclick="prefSelect(this,'pref-flattype','flattype',true);event.stopPropagation()">Shared room</div>
-        <div class="chip" onclick="prefSelect(this,'pref-flattype','flattype',true);event.stopPropagation()">Studio</div>
+      <div id="pref-gender" class="pref-opts" style="display:none;">
+        <div class="chip" onclick="prefSelect(this,'pref-gender','gender',false);event.stopPropagation()">👩 Women only</div>
+        <div class="chip" onclick="prefSelect(this,'pref-gender','gender',false);event.stopPropagation()">👨 Men only</div>
+        <div class="chip" onclick="prefSelect(this,'pref-gender','gender',false);event.stopPropagation()">🌈 Any gender</div>
+      </div>
+
+      <div class="pref-row" onclick="togglePref('pref-age')">
+        <div><div class="pref-title">Age range</div><div class="pref-val" id="pref-age-val">Open to all</div></div>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#9AA0B2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div id="pref-age" class="pref-opts" style="display:none;">
+        <div class="chip" onclick="prefSelect(this,'pref-age','age',false);event.stopPropagation()">18–22</div>
+        <div class="chip" onclick="prefSelect(this,'pref-age','age',false);event.stopPropagation()">22–26</div>
+        <div class="chip" onclick="prefSelect(this,'pref-age','age',false);event.stopPropagation()">26–30</div>
+        <div class="chip" onclick="prefSelect(this,'pref-age','age',false);event.stopPropagation()">30–35</div>
+        <div class="chip" onclick="prefSelect(this,'pref-age','age',false);event.stopPropagation()">35+</div>
+        <div class="chip" onclick="prefSelect(this,'pref-age','age',false);event.stopPropagation()">Flexible</div>
+      </div>
+
+      <div class="pref-row" onclick="togglePref('pref-occupation')">
+        <div><div class="pref-title">Occupation</div><div class="pref-val" id="pref-occupation-val">Open to all</div></div>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#9AA0B2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div id="pref-occupation" class="pref-opts" style="display:none;">
+        <div class="chip" onclick="prefSelect(this,'pref-occupation','occupation',true);event.stopPropagation()">💼 Working professional</div>
+        <div class="chip" onclick="prefSelect(this,'pref-occupation','occupation',true);event.stopPropagation()">🎓 Student</div>
+        <div class="chip" onclick="prefSelect(this,'pref-occupation','occupation',true);event.stopPropagation()">💻 Freelancer</div>
+        <div class="chip" onclick="prefSelect(this,'pref-occupation','occupation',true);event.stopPropagation()">🚀 Entrepreneur</div>
       </div>
 
       <div class="pref-row" onclick="togglePref('pref-food')">
-        <div><div class="pref-title">Food in flat</div><div class="pref-val" id="pref-food-val">Open to all</div></div>
+        <div><div class="pref-title">Food habits</div><div class="pref-val" id="pref-food-val">Open to all</div></div>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#9AA0B2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
       <div id="pref-food" class="pref-opts" style="display:none;">
@@ -1554,6 +1613,26 @@
         <div class="chip" onclick="prefSelect(this,'pref-food','food',true);event.stopPropagation()">🍳 Eggetarian ok</div>
         <div class="chip" onclick="prefSelect(this,'pref-food','food',true);event.stopPropagation()">🍗 Non-veg ok</div>
         <div class="chip" onclick="prefSelect(this,'pref-food','food',true);event.stopPropagation()">🌱 Vegan only</div>
+      </div>
+
+      <div class="pref-row" onclick="togglePref('pref-smoking')">
+        <div><div class="pref-title">Smoking</div><div class="pref-val" id="pref-smoking-val">Open to all</div></div>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#9AA0B2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div id="pref-smoking" class="pref-opts" style="display:none;">
+        <div class="chip" onclick="prefSelect(this,'pref-smoking','smoking',false);event.stopPropagation()">🚭 Non-smoker</div>
+        <div class="chip" onclick="prefSelect(this,'pref-smoking','smoking',false);event.stopPropagation()">🚬 Smoker ok</div>
+        <div class="chip" onclick="prefSelect(this,'pref-smoking','smoking',false);event.stopPropagation()">🏠 Outside only</div>
+      </div>
+
+      <div class="pref-row" onclick="togglePref('pref-drinking')">
+        <div><div class="pref-title">Drinking</div><div class="pref-val" id="pref-drinking-val">Open to all</div></div>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#9AA0B2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div id="pref-drinking" class="pref-opts" style="display:none;">
+        <div class="chip" onclick="prefSelect(this,'pref-drinking','drinking',false);event.stopPropagation()">🚫 Teetotaller only</div>
+        <div class="chip" onclick="prefSelect(this,'pref-drinking','drinking',false);event.stopPropagation()">🍷 Social drinker ok</div>
+        <div class="chip" onclick="prefSelect(this,'pref-drinking','drinking',false);event.stopPropagation()">🍺 Fine with drinking</div>
       </div>
 
       <div class="pref-row" onclick="togglePref('pref-pets')">
@@ -1567,9 +1646,12 @@
         <div class="chip" onclick="prefSelect(this,'pref-pets','pets',true);event.stopPropagation()">🤧 Allergic</div>
       </div>
 
-      <!-- Venn+ section -->
-      <div style="font-family:'Space Mono',monospace;font-size:10px;color:#9AA0B2;letter-spacing:0.08em;text-transform:uppercase;padding:20px 0 10px;">Subscriber preferences</div>
-      <div style="background:linear-gradient(135deg,#F3EEFF,#EEF0FF);border-radius:16px;padding:14px 16px;margin-bottom:12px;display:flex;align-items:center;gap:12px;">
+      <!-- ── Venn+ locked section ── -->
+      <div style="display:flex;align-items:center;gap:8px;padding:20px 0 10px;">
+        <span style="font-family:'Space Mono',monospace;font-size:10px;color:#9AA0B2;letter-spacing:0.08em;text-transform:uppercase;">Venn+ Preferences</span>
+        <div style="flex:1;height:1px;background:#F0F1F5;"></div>
+      </div>
+      <div style="background:linear-gradient(135deg,#F3EEFF,#EEF0FF);border-radius:16px;padding:14px 16px;margin-bottom:14px;display:flex;align-items:center;gap:12px;">
         <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#8A5BFF,#335CFF);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z" fill="#fff"/></svg>
         </div>
@@ -1579,12 +1661,13 @@
         </div>
       </div>
 
-      <div style="opacity:0.45;pointer-events:none;">
+      <div style="opacity:0.4;pointer-events:none;">
         <div class="pref-row"><div><div class="pref-title">Sleep schedule</div><div class="pref-val">Open to all</div></div><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="11" width="18" height="11" rx="2" stroke="#9AA0B2" stroke-width="2"/><path d="M7 11V7a5 5 0 0110 0v4" stroke="#9AA0B2" stroke-width="2" stroke-linecap="round"/></svg></div>
-        <div class="pref-row"><div><div class="pref-title">Cleanliness</div><div class="pref-val">Open to all</div></div><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="11" width="18" height="11" rx="2" stroke="#9AA0B2" stroke-width="2"/><path d="M7 11V7a5 5 0 0110 0v4" stroke="#9AA0B2" stroke-width="2" stroke-linecap="round"/></svg></div>
+        <div class="pref-row"><div><div class="pref-title">Cleanliness level</div><div class="pref-val">Open to all</div></div><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="11" width="18" height="11" rx="2" stroke="#9AA0B2" stroke-width="2"/><path d="M7 11V7a5 5 0 0110 0v4" stroke="#9AA0B2" stroke-width="2" stroke-linecap="round"/></svg></div>
         <div class="pref-row"><div><div class="pref-title">Guests at home</div><div class="pref-val">Open to all</div></div><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="11" width="18" height="11" rx="2" stroke="#9AA0B2" stroke-width="2"/><path d="M7 11V7a5 5 0 0110 0v4" stroke="#9AA0B2" stroke-width="2" stroke-linecap="round"/></svg></div>
         <div class="pref-row"><div><div class="pref-title">Work from home</div><div class="pref-val">Open to all</div></div><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="11" width="18" height="11" rx="2" stroke="#9AA0B2" stroke-width="2"/><path d="M7 11V7a5 5 0 0110 0v4" stroke="#9AA0B2" stroke-width="2" stroke-linecap="round"/></svg></div>
-        <div class="pref-row" style="border-bottom:none;"><div><div class="pref-title">Noise level</div><div class="pref-val">Open to all</div></div><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="11" width="18" height="11" rx="2" stroke="#9AA0B2" stroke-width="2"/><path d="M7 11V7a5 5 0 0110 0v4" stroke="#9AA0B2" stroke-width="2" stroke-linecap="round"/></svg></div>
+        <div class="pref-row"><div><div class="pref-title">Noise level</div><div class="pref-val">Open to all</div></div><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="11" width="18" height="11" rx="2" stroke="#9AA0B2" stroke-width="2"/><path d="M7 11V7a5 5 0 0110 0v4" stroke="#9AA0B2" stroke-width="2" stroke-linecap="round"/></svg></div>
+        <div class="pref-row" style="border-bottom:none;"><div><div class="pref-title">Weekend habits</div><div class="pref-val">Open to all</div></div><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="11" width="18" height="11" rx="2" stroke="#9AA0B2" stroke-width="2"/><path d="M7 11V7a5 5 0 0110 0v4" stroke="#9AA0B2" stroke-width="2" stroke-linecap="round"/></svg></div>
       </div>
 
       <button onclick="savePreferences()" style="width:100%;margin-top:24px;background:linear-gradient(135deg,#335CFF,#8A5BFF);color:#fff;border:none;border-radius:50px;padding:16px;font-family:'Hanken Grotesk',sans-serif;font-size:16px;font-weight:700;cursor:pointer;">Save preferences</button>
