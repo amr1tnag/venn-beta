@@ -634,10 +634,8 @@
   });
 
   // ── Waitlist form ──
-  // Sign up free at formspree.io → create form → paste your ID here
-  // Web3Forms — free, proper CORS, emails delivered to your inbox instantly
-  // Get your free key at web3forms.com (enter your email, copy the key)
-  const W3F_KEY = 'YOUR_WEB3FORMS_KEY';
+  const SUPA_URL = 'https://tulviybefzhlenvpahva.supabase.co';
+  const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR1bHZpeWJlZnpobHNudnBhaHZhIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4MjQ4NjkwNiwiZXhwIjoyMDk4MDYyOTA2fQ.N7nLNhYb0xqRnWwmz5bzTn0ZHqkSzqj4vyDp-Ev64gU';
 
   async function submitWaitlist(slot) {
     const emailEl   = document.getElementById(slot + '-email');
@@ -657,14 +655,15 @@
     btn.disabled = true;
 
     try {
-      await fetch('https://api.web3forms.com/submit', {
+      await fetch(`${SUPA_URL}/rest/v1/waitlist`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({
-          access_key: W3F_KEY,
-          subject: 'New Venn Waitlist Signup',
-          email,
-        }),
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPA_KEY,
+          'Authorization': `Bearer ${SUPA_KEY}`,
+          'Prefer': 'return=minimal',
+        },
+        body: JSON.stringify({ email }),
       });
     } catch(e) {}
 
