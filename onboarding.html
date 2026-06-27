@@ -2592,9 +2592,24 @@
   }
 
   // Notification toggle
-  let notifOn = true;
+  // ── Persistent state ────────────────────────────────────────────────────────
+  const _LS_KEY = 'venn_state';
+  function _loadState() {
+    try { return JSON.parse(localStorage.getItem(_LS_KEY)) || {}; } catch { return {}; }
+  }
+  function _saveState(patch) {
+    const s = _loadState();
+    Object.assign(s, patch);
+    localStorage.setItem(_LS_KEY, JSON.stringify(s));
+  }
+
+  // Load persisted values immediately
+  const _persisted = _loadState();
+
+  let notifOn = _persisted.notifOn !== undefined ? _persisted.notifOn : true;
   function toggleNotif() {
     notifOn = !notifOn;
+    _saveState({ notifOn });
     const t = document.getElementById('notif-toggle');
     const k = document.getElementById('notif-knob');
     t.style.background = notifOn ? '#335CFF' : '#D1D5DB';
@@ -2676,7 +2691,7 @@
     },
   ];
 
-  let feedIdx = 0;
+  let feedIdx = _persisted.feedIdx || 0;
 
   function renderFeedCard(profile) {
     const accentPrompt = profile.prompts.find(p => p.accent);
@@ -2920,6 +2935,7 @@
   }
 
   function initFeed() {
+    _saveState({ feedIdx });
     if (feedIdx >= feedProfiles.length) {
       document.getElementById('feed-stack').innerHTML = `
         <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:16px;padding:40px;">
@@ -3585,11 +3601,18 @@
   }
 
   function initEditProfile() {
+    const drafts = (_loadState().promptDrafts) || {};
     ['ep-a0','ep-a1','ep-a2'].forEach(id => {
       const ta = document.getElementById(id);
       if (!ta) return;
+      if (drafts[id]) ta.value = drafts[id];
       document.getElementById(id + '-count').textContent = ta.value.length + '/150';
-      ta.oninput = () => { document.getElementById(id + '-count').textContent = ta.value.length + '/150'; };
+      ta.oninput = () => {
+        document.getElementById(id + '-count').textContent = ta.value.length + '/150';
+        const d = (_loadState().promptDrafts) || {};
+        d[id] = ta.value;
+        _saveState({ promptDrafts: d });
+      };
     });
   }
 
@@ -4277,9 +4300,10 @@
     document.getElementById('p-sheet-overlay').style.display = 'none';
   }
 
-  let commentFilterOn = true;
+  let commentFilterOn = _persisted.commentFilterOn !== undefined ? _persisted.commentFilterOn : true;
   function toggleCommentFilter(row) {
     commentFilterOn = !commentFilterOn;
+    _saveState({ commentFilterOn });
     const tog = document.getElementById('comment-filter-toggle');
     const knob = document.getElementById('comment-filter-knob');
     if (commentFilterOn) {
