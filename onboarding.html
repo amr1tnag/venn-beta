@@ -753,6 +753,84 @@
   <div class="pq-footer">
     <div class="pq-footer-inner">
       <div></div>
+      <button class="pq-next-btn active" onclick="goTo(28)"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M5 11h12M12 6l5 5-5 5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     S28 — RENTAL BUDGET
+══════════════════════════════════════════ -->
+<div class="screen pq-screen" id="s28">
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:52px 24px 0;flex-shrink:0;">
+    <div class="back-btn" onclick="goBack()" style="position:relative;top:0;left:0;width:36px;height:36px;">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M13 4l-6 6 6 6" stroke="#14161B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <button onclick="goTo(22)" style="background:#fff;border:1.5px solid #E6E8EE;border-radius:50px;padding:8px 18px;font-family:'Hanken Grotesk',sans-serif;font-size:14px;font-weight:600;color:#14161B;cursor:pointer;">Skip</button>
+  </div>
+  <div class="scroll-body px-main" style="padding-top:24px;padding-bottom:120px;">
+    <h1 class="pq-title" style="margin-bottom:6px;">What's your monthly rental budget?</h1>
+    <p class="pq-sub" style="margin-bottom:28px;">This helps us show you flats and flatmates within your range.</p>
+
+    <!-- Budget range display -->
+    <div style="background:#fff;border-radius:20px;padding:24px 20px;margin-bottom:20px;text-align:center;">
+      <div style="font-family:'Space Mono',monospace;font-size:11px;color:#9AA0B2;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:12px;">Your budget</div>
+      <div style="display:flex;align-items:center;justify-content:center;gap:12px;">
+        <div style="flex:1;background:#F2F3F7;border-radius:14px;padding:14px 12px;text-align:center;">
+          <div style="font-family:'Hanken Grotesk',sans-serif;font-size:12px;color:#9AA0B2;margin-bottom:4px;">Min</div>
+          <div id="budget-min-display" style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;color:#14161B;">₹5,000</div>
+        </div>
+        <div style="font-family:'Hanken Grotesk',sans-serif;color:#9AA0B2;font-size:18px;">—</div>
+        <div style="flex:1;background:#F2F3F7;border-radius:14px;padding:14px 12px;text-align:center;">
+          <div style="font-family:'Hanken Grotesk',sans-serif;font-size:12px;color:#9AA0B2;margin-bottom:4px;">Max</div>
+          <div id="budget-max-display" style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;color:#335CFF;">₹25,000</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Min slider -->
+    <div style="background:#fff;border-radius:18px;padding:20px;margin-bottom:12px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+        <span style="font-family:'Hanken Grotesk',sans-serif;font-size:14px;font-weight:600;color:#14161B;">Minimum</span>
+        <span id="budget-min-label" style="font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;color:#335CFF;">₹5,000</span>
+      </div>
+      <input type="range" id="budget-min" min="0" max="100000" step="1000" value="5000"
+        oninput="updateBudget()"
+        style="width:100%;accent-color:#335CFF;height:4px;cursor:pointer;">
+      <div style="display:flex;justify-content:space-between;margin-top:8px;">
+        <span style="font-family:'Hanken Grotesk',sans-serif;font-size:12px;color:#9AA0B2;">₹0</span>
+        <span style="font-family:'Hanken Grotesk',sans-serif;font-size:12px;color:#9AA0B2;">₹1L+</span>
+      </div>
+    </div>
+
+    <!-- Max slider -->
+    <div style="background:#fff;border-radius:18px;padding:20px;margin-bottom:24px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+        <span style="font-family:'Hanken Grotesk',sans-serif;font-size:14px;font-weight:600;color:#14161B;">Maximum</span>
+        <span id="budget-max-label" style="font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;color:#335CFF;">₹25,000</span>
+      </div>
+      <input type="range" id="budget-max" min="0" max="100000" step="1000" value="25000"
+        oninput="updateBudget()"
+        style="width:100%;accent-color:#335CFF;height:4px;cursor:pointer;">
+      <div style="display:flex;justify-content:space-between;margin-top:8px;">
+        <span style="font-family:'Hanken Grotesk',sans-serif;font-size:12px;color:#9AA0B2;">₹0</span>
+        <span style="font-family:'Hanken Grotesk',sans-serif;font-size:12px;color:#9AA0B2;">₹1L+</span>
+      </div>
+    </div>
+
+    <!-- Quick presets -->
+    <div style="font-family:'Hanken Grotesk',sans-serif;font-size:13px;color:#9AA0B2;margin-bottom:12px;font-weight:500;">Quick select</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;">
+      <div class="chip" onclick="setBudgetPreset(5000,15000)">Under ₹15k</div>
+      <div class="chip" onclick="setBudgetPreset(10000,25000)">₹10k – ₹25k</div>
+      <div class="chip" onclick="setBudgetPreset(20000,40000)">₹20k – ₹40k</div>
+      <div class="chip" onclick="setBudgetPreset(35000,60000)">₹35k – ₹60k</div>
+      <div class="chip" onclick="setBudgetPreset(50000,100000)">₹50k+</div>
+    </div>
+  </div>
+  <div class="pq-footer">
+    <div class="pq-footer-inner">
+      <div></div>
       <button class="pq-next-btn active" onclick="goTo(22)"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M5 11h12M12 6l5 5-5 5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     </div>
   </div>
@@ -1797,6 +1875,27 @@
   }
 
 
+
+  // ── Budget sliders ───────────────────────────────────────────────────────
+  function formatBudget(v) {
+    if (v >= 100000) return '₹1L+';
+    if (v >= 1000) return '₹' + (v/1000).toFixed(0) + ',000';
+    return '₹' + v;
+  }
+  function updateBudget() {
+    let min = parseInt(document.getElementById('budget-min').value);
+    let max = parseInt(document.getElementById('budget-max').value);
+    if (min > max) { max = min; document.getElementById('budget-max').value = max; }
+    document.getElementById('budget-min-label').textContent = formatBudget(min);
+    document.getElementById('budget-max-label').textContent = formatBudget(max);
+    document.getElementById('budget-min-display').textContent = formatBudget(min);
+    document.getElementById('budget-max-display').textContent = formatBudget(max);
+  }
+  function setBudgetPreset(min, max) {
+    document.getElementById('budget-min').value = min;
+    document.getElementById('budget-max').value = max;
+    updateBudget();
+  }
 
   // ── Boost modal ──────────────────────────────────────────────────────────
   function openBoostSheet() { document.getElementById('boost-modal').style.display = 'block'; }
