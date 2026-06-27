@@ -2108,6 +2108,247 @@
 </div>
 
 <!-- ══════════════════════════════════════════
+     S37 — SEARCH PREFERENCES
+══════════════════════════════════════════ -->
+<div class="screen" id="s37" style="background:#F2F3F7;display:flex;flex-direction:column;overflow:hidden;">
+  <div class="status"><span class="status-time">9:41</span></div>
+
+  <!-- Header -->
+  <div style="flex-shrink:0;padding:8px 20px 16px;">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div onclick="goBack()" style="width:36px;height:36px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 6px rgba(0,0,0,0.07);cursor:pointer;flex-shrink:0;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="#14161B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h1 style="font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:800;color:#14161B;letter-spacing:-0.03em;margin:0;flex:1;">Search Preferences</h1>
+    </div>
+  </div>
+
+  <div style="flex:1;overflow-y:auto;scrollbar-width:none;background:#fff;border-radius:20px 20px 0 0;">
+
+    <!-- City / Area -->
+    <div style="padding:20px 20px 4px;">
+      <div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;color:#14161B;margin-bottom:4px;">City</div>
+      <div style="font-family:'Hanken Grotesk',sans-serif;font-size:12px;color:#9AA0B2;margin-bottom:14px;">Select all cities you're open to</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;" id="pref-city-chips">
+        <div onclick="togglePrefChip(this,'city')" data-active="true" style="padding:9px 16px;border-radius:50px;background:#14161B;color:#fff;font-family:'Hanken Grotesk',sans-serif;font-size:13px;font-weight:600;cursor:pointer;">Mumbai</div>
+        <div onclick="togglePrefChip(this,'city')" style="padding:9px 16px;border-radius:50px;background:#F2F3F7;color:#14161B;font-family:'Hanken Grotesk',sans-serif;font-size:13px;font-weight:600;cursor:pointer;">Navi Mumbai</div>
+        <div onclick="togglePrefChip(this,'city')" style="padding:9px 16px;border-radius:50px;background:#F2F3F7;color:#14161B;font-family:'Hanken Grotesk',sans-serif;font-size:13px;font-weight:600;cursor:pointer;">Thane</div>
+        <div onclick="togglePrefChip(this,'city')" style="padding:9px 16px;border-radius:50px;background:#F2F3F7;color:#14161B;font-family:'Hanken Grotesk',sans-serif;font-size:13px;font-weight:600;cursor:pointer;">Pune</div>
+      </div>
+    </div>
+
+    <div style="height:1px;background:#F0F1F5;margin:16px 20px;"></div>
+
+    <!-- Neighbourhoods -->
+    <div style="padding:0 20px 4px;">
+      <div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;color:#14161B;margin-bottom:4px;">Neighbourhood</div>
+      <div style="font-family:'Hanken Grotesk',sans-serif;font-size:12px;color:#9AA0B2;margin-bottom:14px;">Pick areas you'd like to live in</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;">
+        <div onclick="togglePrefChip(this,'area')" data-active="true" style="padding:9px 16px;border-radius:50px;background:#14161B;color:#fff;font-family:'Hanken Grotesk',sans-serif;font-size:13px;font-weight:600;cursor:pointer;">Bandra</div>
+        <div onclick="togglePrefChip(this,'area')" style="padding:9px 16px;border-radius:50px;background:#F2F3F7;color:#14161B;font-family:'Hanken Grotesk',sans-serif;font-size:13px;font-weight:600;cursor:pointer;">Andheri</div>
+        <div onclick="togglePrefChip(this,'area')" style="padding:9px 16px;border-radius:50px;background:#F2F3F7;color:#14161B;font-family:'Hanken Grotesk',sans-serif;font-size:13px;font-weight:600;cursor:pointer;">Powai</div>
+        <div onclick="togglePrefChip(this,'area')" style="padding:9px 16px;border-radius:50px;background:#F2F3F7;color:#14161B;font-family:'Hanken Grotesk',sans-serif;font-size:13px;font-weight:600;cursor:pointer;">Dadar</div>
+        <div onclick="togglePrefChip(this,'area')" style="padding:9px 16px;border-radius:50px;background:#F2F3F7;color:#14161B;font-family:'Hanken Grotesk',sans-serif;font-size:13px;font-weight:600;cursor:pointer;">Worli</div>
+        <div onclick="togglePrefChip(this,'area')" style="padding:9px 16px;border-radius:50px;background:#F2F3F7;color:#14161B;font-family:'Hanken Grotesk',sans-serif;font-size:13px;font-weight:600;cursor:pointer;">Lower Parel</div>
+        <div onclick="togglePrefChip(this,'area')" style="padding:9px 16px;border-radius:50px;background:#F2F3F7;color:#14161B;font-family:'Hanken Grotesk',sans-serif;font-size:13px;font-weight:600;cursor:pointer;">Malad</div>
+        <div onclick="togglePrefChip(this,'area')" style="padding:9px 16px;border-radius:50px;background:#F2F3F7;color:#14161B;font-family:'Hanken Grotesk',sans-serif;font-size:13px;font-weight:600;cursor:pointer;">Kurla</div>
+      </div>
+    </div>
+
+    <div style="height:1px;background:#F0F1F5;margin:16px 20px;"></div>
+
+    <!-- Budget -->
+    <div style="padding:0 20px 4px;">
+      <div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;color:#14161B;margin-bottom:14px;">Monthly Budget</div>
+      <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:16px;">
+        <div style="flex:1;background:#F2F3F7;border-radius:14px;padding:14px 12px;text-align:center;">
+          <div style="font-family:'Hanken Grotesk',sans-serif;font-size:11px;color:#9AA0B2;margin-bottom:4px;">Min</div>
+          <div id="sp-min-display" style="font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:700;color:#14161B;">₹5,000</div>
+        </div>
+        <div style="font-family:'Hanken Grotesk',sans-serif;color:#9AA0B2;font-size:18px;">—</div>
+        <div style="flex:1;background:#F2F3F7;border-radius:14px;padding:14px 12px;text-align:center;">
+          <div style="font-family:'Hanken Grotesk',sans-serif;font-size:11px;color:#9AA0B2;margin-bottom:4px;">Max</div>
+          <div id="sp-max-display" style="font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:700;color:#335CFF;">₹25,000</div>
+        </div>
+      </div>
+      <input type="range" id="sp-budget-min" min="0" max="100000" step="1000" value="5000" oninput="updateSPBudget()" style="width:100%;accent-color:#335CFF;height:4px;cursor:pointer;margin-bottom:10px;">
+      <input type="range" id="sp-budget-max" min="0" max="100000" step="1000" value="25000" oninput="updateSPBudget()" style="width:100%;accent-color:#8A5BFF;height:4px;cursor:pointer;">
+      <div style="display:flex;justify-content:space-between;margin-top:6px;">
+        <span style="font-family:'Hanken Grotesk',sans-serif;font-size:11px;color:#9AA0B2;">₹0</span>
+        <span style="font-family:'Hanken Grotesk',sans-serif;font-size:11px;color:#9AA0B2;">₹1L+</span>
+      </div>
+    </div>
+
+    <div style="height:1px;background:#F0F1F5;margin:16px 20px;"></div>
+
+    <!-- Move-in date -->
+    <div style="padding:0 20px 4px;">
+      <div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;color:#14161B;margin-bottom:14px;">Move-in</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;">
+        <div onclick="togglePrefChip(this,'movein')" data-active="true" style="padding:9px 16px;border-radius:50px;background:#14161B;color:#fff;font-family:'Hanken Grotesk',sans-serif;font-size:13px;font-weight:600;cursor:pointer;">ASAP</div>
+        <div onclick="togglePrefChip(this,'movein')" style="padding:9px 16px;border-radius:50px;background:#F2F3F7;color:#14161B;font-family:'Hanken Grotesk',sans-serif;font-size:13px;font-weight:600;cursor:pointer;">Within 1 month</div>
+        <div onclick="togglePrefChip(this,'movein')" style="padding:9px 16px;border-radius:50px;background:#F2F3F7;color:#14161B;font-family:'Hanken Grotesk',sans-serif;font-size:13px;font-weight:600;cursor:pointer;">2–3 months</div>
+        <div onclick="togglePrefChip(this,'movein')" style="padding:9px 16px;border-radius:50px;background:#F2F3F7;color:#14161B;font-family:'Hanken Grotesk',sans-serif;font-size:13px;font-weight:600;cursor:pointer;">Flexible</div>
+      </div>
+    </div>
+
+    <div style="height:1px;background:#F0F1F5;margin:16px 20px;"></div>
+
+    <!-- Flatmate gender -->
+    <div style="padding:0 20px 4px;">
+      <div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;color:#14161B;margin-bottom:4px;">Flatmate gender</div>
+      <div style="font-family:'Hanken Grotesk',sans-serif;font-size:12px;color:#9AA0B2;margin-bottom:14px;">Hidden from your public profile</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;">
+        <div onclick="togglePrefChip(this,'gender')" style="padding:9px 16px;border-radius:50px;background:#F2F3F7;color:#14161B;font-family:'Hanken Grotesk',sans-serif;font-size:13px;font-weight:600;cursor:pointer;">Women only</div>
+        <div onclick="togglePrefChip(this,'gender')" style="padding:9px 16px;border-radius:50px;background:#F2F3F7;color:#14161B;font-family:'Hanken Grotesk',sans-serif;font-size:13px;font-weight:600;cursor:pointer;">Men only</div>
+        <div onclick="togglePrefChip(this,'gender')" data-active="true" style="padding:9px 16px;border-radius:50px;background:#14161B;color:#fff;font-family:'Hanken Grotesk',sans-serif;font-size:13px;font-weight:600;cursor:pointer;">Everyone</div>
+      </div>
+    </div>
+
+    <div style="height:1px;background:#F0F1F5;margin:16px 20px;"></div>
+
+    <!-- Lifestyle filters -->
+    <div style="padding:0 20px 4px;">
+      <div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;color:#14161B;margin-bottom:14px;">Lifestyle</div>
+      <div onclick="toggleLifestyleRow(this,'smoking')" data-on="false" style="display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid #F0F1F5;cursor:pointer;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span style="font-size:18px;">🚭</span>
+          <span style="font-family:'Hanken Grotesk',sans-serif;font-size:15px;color:#14161B;font-weight:500;">Non-smokers only</span>
+        </div>
+        <div class="ls-toggle" style="width:42px;height:24px;border-radius:12px;background:#E6E8EE;position:relative;transition:background 0.2s;">
+          <div class="ls-knob" style="position:absolute;left:3px;top:3px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,0.2);transition:all 0.2s;"></div>
+        </div>
+      </div>
+      <div onclick="toggleLifestyleRow(this,'veg')" data-on="true" style="display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid #F0F1F5;cursor:pointer;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span style="font-size:18px;">🥗</span>
+          <span style="font-family:'Hanken Grotesk',sans-serif;font-size:15px;color:#14161B;font-weight:500;">Vegetarian only</span>
+        </div>
+        <div class="ls-toggle" style="width:42px;height:24px;border-radius:12px;background:#335CFF;position:relative;transition:background 0.2s;">
+          <div class="ls-knob" style="position:absolute;right:3px;top:3px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,0.2);transition:all 0.2s;"></div>
+        </div>
+      </div>
+      <div onclick="toggleLifestyleRow(this,'pets')" data-on="false" style="display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid #F0F1F5;cursor:pointer;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span style="font-size:18px;">🐾</span>
+          <span style="font-family:'Hanken Grotesk',sans-serif;font-size:15px;color:#14161B;font-weight:500;">Pet-friendly</span>
+        </div>
+        <div class="ls-toggle" style="width:42px;height:24px;border-radius:12px;background:#E6E8EE;position:relative;transition:background 0.2s;">
+          <div class="ls-knob" style="position:absolute;left:3px;top:3px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,0.2);transition:all 0.2s;"></div>
+        </div>
+      </div>
+      <div onclick="toggleLifestyleRow(this,'early')" data-on="false" style="display:flex;align-items:center;justify-content:space-between;padding:14px 0;cursor:pointer;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span style="font-size:18px;">🌙</span>
+          <span style="font-family:'Hanken Grotesk',sans-serif;font-size:15px;color:#14161B;font-weight:500;">Night owls preferred</span>
+        </div>
+        <div class="ls-toggle" style="width:42px;height:24px;border-radius:12px;background:#E6E8EE;position:relative;transition:background 0.2s;">
+          <div class="ls-knob" style="position:absolute;left:3px;top:3px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,0.2);transition:all 0.2s;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Save button -->
+    <div style="padding:20px 20px 32px;">
+      <button onclick="savePrefsDone()" style="width:100%;padding:15px;background:#14161B;border:none;border-radius:50px;font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;color:#fff;cursor:pointer;">Save preferences</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     S38 — EDIT PROFILE
+══════════════════════════════════════════ -->
+<div class="screen" id="s38" style="background:#F2F3F7;display:flex;flex-direction:column;overflow:hidden;">
+  <div class="status"><span class="status-time">9:41</span></div>
+
+  <!-- Header -->
+  <div style="flex-shrink:0;padding:8px 20px 16px;">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div onclick="goBack()" style="width:36px;height:36px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 6px rgba(0,0,0,0.07);cursor:pointer;flex-shrink:0;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="#14161B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h1 style="font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:800;color:#14161B;letter-spacing:-0.03em;margin:0;flex:1;">Edit Profile</h1>
+      <button onclick="saveProfileEdit()" style="background:#335CFF;border:none;border-radius:50px;padding:9px 18px;font-family:'Hanken Grotesk',sans-serif;font-size:13px;font-weight:700;color:#fff;cursor:pointer;">Save</button>
+    </div>
+  </div>
+
+  <div style="flex:1;overflow-y:auto;scrollbar-width:none;background:#fff;border-radius:20px 20px 0 0;">
+
+    <!-- About section -->
+    <div style="padding:20px 20px 4px;">
+      <div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;color:#14161B;margin-bottom:14px;">About you</div>
+
+      <div style="margin-bottom:12px;">
+        <label style="font-family:'Hanken Grotesk',sans-serif;font-size:12px;font-weight:600;color:#9AA0B2;text-transform:uppercase;letter-spacing:0.06em;display:block;margin-bottom:6px;">🎓 Education</label>
+        <input id="ep-education" type="text" value="IIT Bombay" style="width:100%;background:#F2F3F7;border:none;border-radius:12px;padding:13px 16px;font-family:'Hanken Grotesk',sans-serif;font-size:15px;color:#14161B;outline:none;box-sizing:border-box;">
+      </div>
+      <div style="margin-bottom:12px;">
+        <label style="font-family:'Hanken Grotesk',sans-serif;font-size:12px;font-weight:600;color:#9AA0B2;text-transform:uppercase;letter-spacing:0.06em;display:block;margin-bottom:6px;">💼 Occupation</label>
+        <input id="ep-occupation" type="text" value="Design intern" style="width:100%;background:#F2F3F7;border:none;border-radius:12px;padding:13px 16px;font-family:'Hanken Grotesk',sans-serif;font-size:15px;color:#14161B;outline:none;box-sizing:border-box;">
+      </div>
+      <div style="margin-bottom:12px;">
+        <label style="font-family:'Hanken Grotesk',sans-serif;font-size:12px;font-weight:600;color:#9AA0B2;text-transform:uppercase;letter-spacing:0.06em;display:block;margin-bottom:6px;">🌙 Sleep schedule</label>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <div onclick="toggleEPChip(this,'sleep')" data-active="true" style="padding:9px 16px;border-radius:50px;background:#14161B;color:#fff;font-family:'Hanken Grotesk',sans-serif;font-size:13px;font-weight:600;cursor:pointer;">Night owl</div>
+          <div onclick="toggleEPChip(this,'sleep')" style="padding:9px 16px;border-radius:50px;background:#F2F3F7;color:#14161B;font-family:'Hanken Grotesk',sans-serif;font-size:13px;font-weight:600;cursor:pointer;">Early bird</div>
+          <div onclick="toggleEPChip(this,'sleep')" style="padding:9px 16px;border-radius:50px;background:#F2F3F7;color:#14161B;font-family:'Hanken Grotesk',sans-serif;font-size:13px;font-weight:600;cursor:pointer;">Flexible</div>
+        </div>
+      </div>
+      <div style="margin-bottom:4px;">
+        <label style="font-family:'Hanken Grotesk',sans-serif;font-size:12px;font-weight:600;color:#9AA0B2;text-transform:uppercase;letter-spacing:0.06em;display:block;margin-bottom:6px;">🧹 Cleanliness</label>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <div onclick="toggleEPChip(this,'clean')" data-active="true" style="padding:9px 16px;border-radius:50px;background:#14161B;color:#fff;font-family:'Hanken Grotesk',sans-serif;font-size:13px;font-weight:600;cursor:pointer;">Tidy</div>
+          <div onclick="toggleEPChip(this,'clean')" style="padding:9px 16px;border-radius:50px;background:#F2F3F7;color:#14161B;font-family:'Hanken Grotesk',sans-serif;font-size:13px;font-weight:600;cursor:pointer;">Moderate</div>
+          <div onclick="toggleEPChip(this,'clean')" style="padding:9px 16px;border-radius:50px;background:#F2F3F7;color:#14161B;font-family:'Hanken Grotesk',sans-serif;font-size:13px;font-weight:600;cursor:pointer;">Relaxed</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="height:1px;background:#F0F1F5;margin:16px 20px;"></div>
+
+    <!-- Prompts section -->
+    <div style="padding:0 20px 4px;">
+      <div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;color:#14161B;margin-bottom:14px;">Prompts</div>
+
+      <div style="margin-bottom:14px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+          <span style="font-family:'Hanken Grotesk',sans-serif;font-size:12px;font-weight:600;color:#9AA0B2;text-transform:uppercase;letter-spacing:0.06em;">Prompt 1</span>
+          <div onclick="openPromptPicker(0)" style="font-family:'Hanken Grotesk',sans-serif;font-size:12px;color:#335CFF;font-weight:500;cursor:pointer;">Change question</div>
+        </div>
+        <div id="ep-q0" style="font-family:'Hanken Grotesk',sans-serif;font-size:12px;color:#5A6072;margin-bottom:6px;padding:0 2px;">My ideal Sunday looks like</div>
+        <textarea id="ep-a0" maxlength="150" rows="3" style="width:100%;background:#F2F3F7;border:none;border-radius:12px;padding:13px 16px;font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:600;color:#14161B;outline:none;resize:none;box-sizing:border-box;line-height:1.45;">Slow mornings, a good playlist, and absolutely no plans</textarea>
+        <div style="font-family:'Hanken Grotesk',sans-serif;font-size:11px;color:#9AA0B2;text-align:right;margin-top:4px;" id="ep-a0-count">51/150</div>
+      </div>
+
+      <div style="margin-bottom:14px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+          <span style="font-family:'Hanken Grotesk',sans-serif;font-size:12px;font-weight:600;color:#9AA0B2;text-transform:uppercase;letter-spacing:0.06em;">Prompt 2</span>
+          <div onclick="openPromptPicker(1)" style="font-family:'Hanken Grotesk',sans-serif;font-size:12px;color:#335CFF;font-weight:500;cursor:pointer;">Change question</div>
+        </div>
+        <div id="ep-q1" style="font-family:'Hanken Grotesk',sans-serif;font-size:12px;color:#5A6072;margin-bottom:6px;padding:0 2px;">I'm looking for a flatmate who</div>
+        <textarea id="ep-a1" maxlength="150" rows="3" style="width:100%;background:#F2F3F7;border:none;border-radius:12px;padding:13px 16px;font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:600;color:#14161B;outline:none;resize:none;box-sizing:border-box;line-height:1.45;"></textarea>
+        <div style="font-family:'Hanken Grotesk',sans-serif;font-size:11px;color:#9AA0B2;text-align:right;margin-top:4px;" id="ep-a1-count">0/150</div>
+      </div>
+
+      <div style="margin-bottom:4px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+          <span style="font-family:'Hanken Grotesk',sans-serif;font-size:12px;font-weight:600;color:#9AA0B2;text-transform:uppercase;letter-spacing:0.06em;">Prompt 3</span>
+          <div onclick="openPromptPicker(2)" style="font-family:'Hanken Grotesk',sans-serif;font-size:12px;color:#335CFF;font-weight:500;cursor:pointer;">Change question</div>
+        </div>
+        <div id="ep-q2" style="font-family:'Hanken Grotesk',sans-serif;font-size:12px;color:#5A6072;margin-bottom:6px;padding:0 2px;">One thing flatmates always say about me</div>
+        <textarea id="ep-a2" maxlength="150" rows="3" style="width:100%;background:#F2F3F7;border:none;border-radius:12px;padding:13px 16px;font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:600;color:#14161B;outline:none;resize:none;box-sizing:border-box;line-height:1.45;"></textarea>
+        <div style="font-family:'Hanken Grotesk',sans-serif;font-size:11px;color:#9AA0B2;text-align:right;margin-top:4px;" id="ep-a2-count">0/150</div>
+      </div>
+    </div>
+
+    <div style="height:32px;"></div>
+  </div>
+
+  <!-- Save toast -->
+  <div id="ep-toast" style="display:none;position:absolute;bottom:100px;left:50%;transform:translateX(-50%);background:#14161B;color:#fff;border-radius:50px;padding:12px 24px;font-family:'Hanken Grotesk',sans-serif;font-size:14px;font-weight:600;white-space:nowrap;z-index:100;">Profile updated ✓</div>
+</div>
+
+<!-- ══════════════════════════════════════════
      S29 — INDIVIDUAL CHAT
 ══════════════════════════════════════════ -->
 <div class="screen" id="s33" style="background:#fff;display:flex;flex-direction:column;overflow:hidden;">
@@ -2198,6 +2439,7 @@
     }
     if (n === 25) { setTimeout(initFeed, 60); }
     if (n === 26) { setTimeout(initStandouts, 60); }
+    if (n === 38) { setTimeout(initEditProfile, 60); }
 
     // Replay animations
     to.querySelectorAll('.fu').forEach(el => { el.style.animation='none'; el.offsetHeight; el.style.animation=''; });
@@ -3115,6 +3357,77 @@
 
   function openChatMenu() { document.getElementById('chat-menu').style.display = 'block'; }
 
+  // ── Search Preferences (S37) ──
+  function togglePrefChip(el, group) {
+    const on = el.dataset.active === 'true';
+    // For single-select groups (movein, gender) deselect siblings
+    if (group === 'movein' || group === 'gender') {
+      el.parentElement.querySelectorAll('[data-active="true"]').forEach(c => {
+        c.dataset.active = 'false'; c.style.background = '#F2F3F7'; c.style.color = '#14161B';
+      });
+    }
+    if (!on || group === 'city' || group === 'area') {
+      el.dataset.active = on ? 'false' : 'true';
+      el.style.background = on ? '#F2F3F7' : '#14161B';
+      el.style.color = on ? '#14161B' : '#fff';
+    } else {
+      el.dataset.active = 'true'; el.style.background = '#14161B'; el.style.color = '#fff';
+    }
+  }
+
+  function updateSPBudget() {
+    let mn = parseInt(document.getElementById('sp-budget-min').value);
+    let mx = parseInt(document.getElementById('sp-budget-max').value);
+    if (mn > mx) { const t = mn; mn = mx; mx = t; }
+    const fmt = v => v >= 100000 ? '₹1L+' : '₹' + v.toLocaleString('en-IN');
+    document.getElementById('sp-min-display').textContent = fmt(mn);
+    document.getElementById('sp-max-display').textContent = fmt(mx);
+  }
+
+  function toggleLifestyleRow(el, key) {
+    const on = el.dataset.on === 'true';
+    el.dataset.on = on ? 'false' : 'true';
+    const tog = el.querySelector('.ls-toggle');
+    const knob = el.querySelector('.ls-knob');
+    tog.style.background = on ? '#E6E8EE' : '#335CFF';
+    knob.style.left = on ? '3px' : ''; knob.style.right = on ? '' : '3px';
+  }
+
+  function savePrefsDone() {
+    goBack();
+  }
+
+  // ── Edit Profile (S38) ──
+  function toggleEPChip(el, group) {
+    el.parentElement.querySelectorAll('[data-active="true"]').forEach(c => {
+      c.dataset.active = 'false'; c.style.background = '#F2F3F7'; c.style.color = '#14161B';
+    });
+    el.dataset.active = 'true'; el.style.background = '#14161B'; el.style.color = '#fff';
+  }
+
+  function openPromptPicker(idx) {
+    // Reuse existing prompt picker (S24) and pass index
+    _promptEditIdx = idx;
+    goTo(24);
+  }
+
+  let _promptEditIdx = 0;
+
+  function saveProfileEdit() {
+    const toast = document.getElementById('ep-toast');
+    toast.style.display = 'block';
+    setTimeout(() => { toast.style.display = 'none'; goBack(); }, 1200);
+  }
+
+  function initEditProfile() {
+    ['ep-a0','ep-a1','ep-a2'].forEach(id => {
+      const ta = document.getElementById(id);
+      if (!ta) return;
+      document.getElementById(id + '-count').textContent = ta.value.length + '/150';
+      ta.oninput = () => { document.getElementById(id + '-count').textContent = ta.value.length + '/150'; };
+    });
+  }
+
   function markAllRead() {
     ['notif-match-kavya','notif-like-priya','notif-msg-meera'].forEach(id => {
       const el = document.getElementById(id);
@@ -3754,7 +4067,7 @@
     settings: {
       title: 'Settings',
       body: `<div style="padding:0 0 20px;">
-        <div onclick="closePSheet();goTo(28)" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid #F0F1F5;cursor:pointer;">
+        <div onclick="closePSheet();goTo(37)" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid #F0F1F5;cursor:pointer;">
           <span style="font-family:'Hanken Grotesk',sans-serif;font-size:15px;color:#14161B;font-weight:500;">Search preferences</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="#C0C5D0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
@@ -3950,7 +4263,7 @@
       <!-- About section -->
       <div style="padding:18px 20px 10px;display:flex;justify-content:space-between;align-items:center;">
         <span style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;color:#14161B;">About you</span>
-        <span onclick="goTo(10)" style="font-family:'Hanken Grotesk',sans-serif;font-size:13px;color:#335CFF;font-weight:500;cursor:pointer;">Edit</span>
+        <span onclick="goTo(38)" style="font-family:'Hanken Grotesk',sans-serif;font-size:13px;color:#335CFF;font-weight:500;cursor:pointer;">Edit</span>
       </div>
       <div style="padding:0 20px 18px;display:flex;flex-wrap:wrap;gap:8px;">
         <div style="background:#F2F3F7;border-radius:50px;padding:7px 14px;display:flex;align-items:center;gap:6px;">
@@ -3980,14 +4293,14 @@
       <!-- Prompts section -->
       <div style="padding:18px 20px 10px;display:flex;justify-content:space-between;align-items:center;">
         <span style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;color:#14161B;">Prompts</span>
-        <span onclick="goTo(22)" style="font-family:'Hanken Grotesk',sans-serif;font-size:13px;color:#335CFF;font-weight:500;cursor:pointer;">Add</span>
+        <span onclick="goTo(38)" style="font-family:'Hanken Grotesk',sans-serif;font-size:13px;color:#335CFF;font-weight:500;cursor:pointer;">Add</span>
       </div>
       <div style="padding:0 20px 20px;">
         <div onclick="openPSheet('editprompt')" style="border-left:3px solid #335CFF;padding:12px 14px;background:#F8F9FF;border-radius:0 12px 12px 0;margin-bottom:10px;cursor:pointer;">
           <div style="font-family:'Hanken Grotesk',sans-serif;font-size:11px;color:#9AA0B2;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.08em;">My ideal Sunday looks like</div>
           <div style="font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:600;color:#14161B;">Slow mornings, a good playlist, and absolutely no plans</div>
         </div>
-        <div onclick="goTo(22)" style="border:1.5px dashed #D0D3DE;border-radius:12px;padding:13px 14px;display:flex;align-items:center;gap:8px;cursor:pointer;">
+        <div onclick="goTo(38)" style="border:1.5px dashed #D0D3DE;border-radius:12px;padding:13px 14px;display:flex;align-items:center;gap:8px;cursor:pointer;">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="#C0C5D0" stroke-width="2" stroke-linecap="round"/></svg>
           <span style="font-family:'Hanken Grotesk',sans-serif;font-size:13px;color:#9AA0B2;">Add a second prompt</span>
         </div>
