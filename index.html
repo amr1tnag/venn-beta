@@ -655,12 +655,10 @@
     btn.disabled = true;
 
     try {
-      // Google Apps Script doesn't support CORS preflight — use no-cors mode
-      await fetch(SHEETS_URL, {
-        method: 'POST',
+      // GET with query param — works reliably with Apps Script + no-cors
+      await fetch(SHEETS_URL + '?email=' + encodeURIComponent(email), {
+        method: 'GET',
         mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
       });
       formEl.style.display = 'none';
       successEl.classList.remove('hidden');
