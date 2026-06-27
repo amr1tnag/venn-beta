@@ -635,13 +635,15 @@
 
   // ── Waitlist form ──
   // Sign up free at formspree.io → create form → paste your ID here
-  const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxfpSzsw0o0pi9AZLfHGhnoNim-WcjwX-vsvmQzFBG_VuzmtLgQjVX0HAQogz9yOhw/exec';
+  // Web3Forms — free, proper CORS, emails delivered to your inbox instantly
+  // Get your free key at web3forms.com (enter your email, copy the key)
+  const W3F_KEY = 'YOUR_WEB3FORMS_KEY';
 
-  function submitWaitlist(slot) {
-    const emailEl = document.getElementById(slot + '-email');
-    const formEl  = document.getElementById(slot + '-waitlist-form');
+  async function submitWaitlist(slot) {
+    const emailEl   = document.getElementById(slot + '-email');
+    const formEl    = document.getElementById(slot + '-waitlist-form');
     const successEl = document.getElementById(slot + '-success');
-    const email = emailEl.value.trim();
+    const email     = emailEl.value.trim();
 
     if (!email || !email.includes('@')) {
       emailEl.style.borderColor = '#FF4D6A';
@@ -650,11 +652,22 @@
       return;
     }
 
+    const btn = formEl.querySelector('button');
+    btn.textContent = 'Joining…';
+    btn.disabled = true;
+
     try {
-      await fetch(SHEETS_URL + '?email=' + encodeURIComponent(email));
-    } catch(err) {
-      // CORS error on response is fine — the request still reached Apps Script
-    }
+      await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: W3F_KEY,
+          subject: 'New Venn Waitlist Signup',
+          email,
+        }),
+      });
+    } catch(e) {}
+
     formEl.style.display = 'none';
     successEl.classList.remove('hidden');
     successEl.style.display = 'flex';
