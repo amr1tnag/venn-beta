@@ -159,6 +159,10 @@
       0%   { transform: translateY(0) rotate(0deg); opacity: 0.9; }
       100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
     }
+    @keyframes typingDot {
+      0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+      30%            { transform: translateY(-4px); opacity: 1; }
+    }
 
     /* ── Status bar ── */
     .status {
@@ -2412,7 +2416,10 @@
       </button>
       <div style="flex:1;display:flex;align-items:center;gap:10px;">
         <img id="chat-avatar" style="width:36px;height:36px;border-radius:50%;object-fit:cover;" src="hero.jpeg"/>
-        <span id="chat-name" style="font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:700;color:#14161B;"></span>
+        <div>
+          <div id="chat-name" style="font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:700;color:#14161B;line-height:1.2;"></div>
+          <div id="chat-status" style="font-family:'Hanken Grotesk',sans-serif;font-size:11px;color:#22C55E;font-weight:500;">Online now</div>
+        </div>
       </div>
       <button onclick="openChatMenu()" style="width:34px;height:34px;border-radius:50%;background:#F2F3F7;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="5" r="1.5" fill="#14161B"/><circle cx="12" cy="12" r="1.5" fill="#14161B"/><circle cx="12" cy="19" r="1.5" fill="#14161B"/></svg>
@@ -2884,8 +2891,7 @@
 
   function maybeTriggerMatch() {
     _likeCount++;
-    // Show match modal every 3rd like
-    if (_likeCount % 3 === 0 && feedIdx < feedProfiles.length) {
+    if ((_likeCount === 1 || _likeCount % 4 === 0) && feedIdx < feedProfiles.length) {
       _matchProfile = feedProfiles[feedIdx];
       showMatchModal(_matchProfile);
     }
@@ -3376,18 +3382,16 @@
     _chatWith = name;
     if (!_chatHistory[name]) {
       if (name === 'Priya') {
-        // Priya texted last → your turn
         _chatHistory[name] = [
-          { from: 'them', text: 'Hey! Are you looking for a flat or already have one?' },
-          { from: 'me',   text: 'Looking for one! Open to Bandra/Andheri. What about you?' },
-          { from: 'them', text: 'I have a 2BHK in Bandra West, looking for a flatmate 🙂' },
+          { from: 'them', text: 'Hey! Are you looking for a flat or already have one?', time: '10:14 AM' },
+          { from: 'me',   text: 'Looking for one! Open to Bandra/Andheri. What about you?', time: '10:16 AM' },
+          { from: 'them', text: 'I have a 2BHK in Bandra West, looking for a flatmate 🙂', time: '10:18 AM' },
         ];
       } else if (name === 'Meera') {
-        // Meera texted last → your turn
         _chatHistory[name] = [
-          { from: 'me',   text: 'Hey Meera! Love that you want a sea-facing place too 🌊' },
-          { from: 'them', text: 'Right?! A balcony with a view would be the dream.' },
-          { from: 'them', text: 'Sounds amazing, I\'d love a balcony too! 🌿' },
+          { from: 'me',   text: 'Hey Meera! Love that you want a sea-facing place too 🌊', time: '9:42 AM' },
+          { from: 'them', text: 'Right?! A balcony with a view would be the dream.', time: '9:45 AM' },
+          { from: 'them', text: 'Sounds amazing, I\'d love a balcony too! 🌿', time: '9:45 AM' },
         ];
       } else if (name === 'Kavya') {
         _chatHistory[name] = [];
@@ -3396,10 +3400,9 @@
       } else if (name === 'Rhea') {
         _chatHistory[name] = [];
       } else {
-        // Ananya — you texted last → their turn
         _chatHistory[name] = [
-          { from: 'them', text: 'Hey! Are you looking for a flat or already have one?' },
-          { from: 'me',   text: 'Open to anywhere central. What about you?' },
+          { from: 'them', text: 'Hey! Are you looking for a flat or already have one?', time: 'Yesterday' },
+          { from: 'me',   text: 'Open to anywhere central. What about you?', time: 'Yesterday' },
         ];
       }
     }
@@ -3506,21 +3509,56 @@
         </div>`;
       }
       return `
-      <div style="display:flex;justify-content:${m.from==='me'?'flex-end':'flex-start'};margin-bottom:10px;">
+      <div style="display:flex;flex-direction:column;align-items:${m.from==='me'?'flex-end':'flex-start'};margin-bottom:10px;">
         <div style="max-width:75%;padding:11px 15px;border-radius:${m.from==='me'?'18px 18px 4px 18px':'18px 18px 18px 4px'};background:${m.from==='me'?'linear-gradient(135deg,#335CFF,#8A5BFF)':'#F2F3F7'};color:${m.from==='me'?'#fff':'#14161B'};font-family:'Hanken Grotesk',sans-serif;font-size:14px;line-height:1.45;">${m.text}</div>
+        ${m.time ? `<div style="font-family:'Space Mono',monospace;font-size:9px;color:#B0B5C4;margin-top:3px;padding:0 4px;">${m.time}</div>` : ''}
       </div>`;
     }).join('');
     const panel = document.getElementById('chat-panel');
     panel.scrollTop = panel.scrollHeight;
   }
 
+  const _autoReplies = {
+    Priya:  ['Tell me more about yourself!', 'What floor is the flat on?', 'Are pets allowed?', 'Sounds great 🙌'],
+    Meera:  ['Yes!! We should definitely meet up 😊', 'Which area are you currently in?', 'Would love to connect!', 'Let me know when you\'re free'],
+    Kavya:  ['Omg hiiii 👋', 'This is exciting!', 'We matched! What are you looking for?', 'I\'m so glad we connected 🥹'],
+    Ishaan: ['Hey! Great to match 😄', 'Are you looking for a place or have one?', 'Nice, let\'s figure this out!', 'What\'s your budget range?'],
+    Rhea:   ['Yay we matched!', 'I just moved to Mumbai last month', 'Still figuring out areas, any suggestions?', 'This feels serendipitous 😅'],
+    Ananya: ['Oh interesting!', 'I\'m more of a South Mumbai person tbh', 'We should check out places together!', 'Sounds like a plan 😊'],
+  };
+  function _nowTime() {
+    const d = new Date();
+    let h = d.getHours(), m = String(d.getMinutes()).padStart(2,'0');
+    return (h % 12 || 12) + ':' + m + ' ' + (h < 12 ? 'AM' : 'PM');
+  }
   function sendChatMsg() {
     const input = document.getElementById('chat-input');
     const text = input.value.trim();
     if (!text || !_chatWith) return;
-    _chatHistory[_chatWith].push({ from: 'me', text });
+    _chatHistory[_chatWith].push({ from: 'me', text, time: _nowTime() });
     input.value = '';
     _renderMessages();
+    // Simulate typing indicator + reply
+    const replies = _autoReplies[_chatWith] || ['Got it!', 'Sounds good!', '😊'];
+    const reply = replies[Math.floor(Math.random() * replies.length)];
+    const name = _chatWith;
+    setTimeout(() => {
+      if (_chatWith !== name) return;
+      const typingEl = document.createElement('div');
+      typingEl.id = 'typing-indicator';
+      typingEl.style.cssText = 'display:flex;align-items:center;gap:4px;padding:10px 14px;background:#F2F3F7;border-radius:18px 18px 18px 4px;width:fit-content;margin-bottom:10px;';
+      typingEl.innerHTML = '<span style="width:6px;height:6px;border-radius:50%;background:#9AA0B2;animation:typingDot 1s infinite 0s;display:inline-block;"></span><span style="width:6px;height:6px;border-radius:50%;background:#9AA0B2;animation:typingDot 1s infinite 0.2s;display:inline-block;"></span><span style="width:6px;height:6px;border-radius:50%;background:#9AA0B2;animation:typingDot 1s infinite 0.4s;display:inline-block;"></span>';
+      document.getElementById('chat-panel').appendChild(typingEl);
+      const panel = document.getElementById('chat-panel');
+      panel.scrollTop = panel.scrollHeight;
+      setTimeout(() => {
+        if (_chatWith !== name) return;
+        const ti = document.getElementById('typing-indicator');
+        if (ti) ti.remove();
+        _chatHistory[name].push({ from: 'them', text: reply, time: _nowTime() });
+        _renderMessages();
+      }, 1200 + Math.random() * 800);
+    }, 600 + Math.random() * 400);
   }
 
   function switchChatTab(tab) {
