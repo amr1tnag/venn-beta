@@ -3142,14 +3142,12 @@
   function _updateLikeCounter() {
     const el = document.getElementById('likes-counter-text');
     if (!el) return;
-    const s = _getLikesState();
-    const left = Math.max(0, _LIKES_PER_DAY - s.used);
-    el.textContent = left > 0 ? `${left} likes left` : 'All used · resets tomorrow';
+    el.textContent = '∞ likes left';
     const pill = document.getElementById('likes-counter-pill');
-    if (pill) pill.style.background = left > 5 ? '#F0FFF4' : left > 0 ? '#FFF7ED' : '#FFF0F3';
-    if (el) el.style.color = left > 5 ? '#22C55E' : left > 0 ? '#F97316' : '#FF4D6A';
+    if (pill) pill.style.background = '#F0FFF4';
+    el.style.color = '#22C55E';
     const svg = pill && pill.querySelector('svg path');
-    if (svg) svg.setAttribute('fill', left > 5 ? '#22C55E' : left > 0 ? '#F97316' : '#FF4D6A');
+    if (svg) svg.setAttribute('fill', '#22C55E');
   }
 
   function updateMatchesCounts() {
