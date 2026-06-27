@@ -155,6 +155,10 @@
     }
     .screen.active  { transform: translateX(0); z-index: 1; }
     .screen.exiting { transform: translateX(-30%); }
+    @keyframes confettiFall {
+      0%   { transform: translateY(0) rotate(0deg); opacity: 0.9; }
+      100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+    }
 
     /* ── Status bar ── */
     .status {
@@ -1256,6 +1260,17 @@
 
   <!-- Profile cards container (stacked, animated) -->
   <div style="flex:1;position:relative;overflow:hidden;" id="feed-stack">
+    <!-- Swipe direction labels -->
+    <div id="swipe-like-label" style="position:absolute;top:36px;left:20px;z-index:50;opacity:0;transition:opacity 0.1s;pointer-events:none;">
+      <div style="border:3px solid #22C55E;border-radius:10px;padding:6px 14px;transform:rotate(-15deg);">
+        <span style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:800;color:#22C55E;letter-spacing:0.04em;">LIKE</span>
+      </div>
+    </div>
+    <div id="swipe-nope-label" style="position:absolute;top:36px;right:20px;z-index:50;opacity:0;transition:opacity 0.1s;pointer-events:none;">
+      <div style="border:3px solid #FF4D6A;border-radius:10px;padding:6px 14px;transform:rotate(15deg);">
+        <span style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:800;color:#FF4D6A;letter-spacing:0.04em;">NOPE</span>
+      </div>
+    </div>
     <!-- rendered by JS -->
   </div>
 
@@ -1302,6 +1317,42 @@
   </div>
 </div>
 
+<!-- ══ MATCH MODAL ══ -->
+<div id="match-modal" style="display:none;position:absolute;inset:0;z-index:1000;background:rgba(10,10,20,0.92);flex-direction:column;align-items:center;justify-content:center;padding:24px;">
+  <div id="match-confetti" style="position:absolute;inset:0;pointer-events:none;overflow:hidden;"></div>
+  <div style="position:relative;z-index:2;text-align:center;width:100%;">
+    <div style="font-family:'Space Mono',monospace;font-size:11px;font-weight:700;color:#8A5BFF;letter-spacing:0.12em;margin-bottom:12px;">IT'S A MATCH!</div>
+    <h2 style="font-family:'Space Grotesk',sans-serif;font-size:30px;font-weight:800;color:#fff;letter-spacing:-0.03em;margin:0 0 6px;line-height:1.1;">You & <span id="match-name">Priya</span><br>liked each other</h2>
+    <p style="font-family:'Hanken Grotesk',sans-serif;font-size:14px;color:rgba(255,255,255,0.55);margin:0 0 32px;">Start a conversation about finding your perfect flat</p>
+    <!-- Avatar pair -->
+    <div style="display:flex;align-items:center;justify-content:center;gap:0;margin-bottom:36px;">
+      <div style="width:88px;height:88px;border-radius:50%;border:3px solid #335CFF;overflow:hidden;box-shadow:0 0 0 4px rgba(51,92,255,0.2);">
+        <div style="width:100%;height:100%;background:linear-gradient(135deg,#335CFF,#8A5BFF);display:flex;align-items:center;justify-content:center;">
+          <span style="font-family:'Space Grotesk',sans-serif;font-size:32px;font-weight:800;color:#fff;">A</span>
+        </div>
+      </div>
+      <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#335CFF,#8A5BFF);display:flex;align-items:center;justify-content:center;z-index:1;box-shadow:0 0 0 4px rgba(10,10,20,0.92);">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" fill="#fff"/></svg>
+      </div>
+      <div style="width:88px;height:88px;border-radius:50%;border:3px solid #8A5BFF;overflow:hidden;box-shadow:0 0 0 4px rgba(138,91,255,0.2);">
+        <img id="match-photo" src="hero.jpeg" style="width:100%;height:100%;object-fit:cover;"/>
+      </div>
+    </div>
+    <!-- Buttons -->
+    <div style="display:flex;flex-direction:column;gap:12px;padding:0 8px;">
+      <button onclick="openMatchChat()" style="width:100%;padding:16px;background:linear-gradient(135deg,#335CFF,#8A5BFF);border:none;border-radius:50px;font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:700;color:#fff;cursor:pointer;">Send a message</button>
+      <button onclick="closeMatchModal()" style="width:100%;padding:16px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:50px;font-family:'Hanken Grotesk',sans-serif;font-size:15px;font-weight:600;color:#fff;cursor:pointer;">Keep swiping</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PHOTO VIEWER ══ -->
+<div id="photo-viewer" onclick="closePhotoViewer()" style="display:none;position:absolute;inset:0;z-index:1001;background:rgba(0,0,0,0.95);flex-direction:column;align-items:center;justify-content:center;">
+  <button onclick="closePhotoViewer();event.stopPropagation()" style="position:absolute;top:52px;right:20px;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.15);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:10;">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+  </button>
+  <img id="photo-viewer-img" src="" style="max-width:100%;max-height:100%;object-fit:contain;"/>
+</div>
 
 <!-- ══════════════════════════════════════════
      S7 — PHONE OTP VERIFY
@@ -2695,7 +2746,7 @@
 
         <!-- Profile photo -->
         <div style="position:relative;border-radius:20px;overflow:hidden;margin-bottom:10px;">
-          <img src="${profile.photo}" style="width:100%;height:400px;object-fit:cover;object-position:${profile.photoPos};display:block;"/>
+          <img src="${profile.photo}" onclick="openPhotoViewer(this.src)" style="width:100%;height:400px;object-fit:cover;object-position:${profile.photoPos};display:block;cursor:zoom-in;"/>
           <div style="position:absolute;bottom:14px;right:14px;width:44px;height:44px;border-radius:50%;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,0.15);display:flex;align-items:center;justify-content:center;cursor:pointer;" onclick="cardLike(this,'${profile.name}')">
             ${heartSVG}
           </div>
@@ -2728,7 +2779,7 @@
 
         <!-- Flat photo -->
         <div style="position:relative;border-radius:20px;overflow:hidden;margin-bottom:10px;">
-          <img src="${profile.flatPhoto}" style="width:100%;height:280px;object-fit:cover;display:block;"/>
+          <img src="${profile.flatPhoto}" onclick="openPhotoViewer(this.src)" style="width:100%;height:280px;object-fit:cover;display:block;cursor:zoom-in;"/>
           <div style="position:absolute;bottom:14px;left:14px;background:rgba(0,0,0,0.42);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border-radius:50px;padding:6px 12px;">
             <span style="font-family:'Hanken Grotesk',sans-serif;font-size:12px;color:#fff;font-weight:600;">${profile.flatLabel}</span>
           </div>
@@ -2755,6 +2806,119 @@
       </div>`;
   }
 
+  // ── Swipe gesture ──────────────────────────────────────────────────────────
+  let _swipeStartX = 0, _swipeStartY = 0, _swipeDragging = false, _swipeDx = 0;
+
+  function attachSwipe(card) {
+    if (!card) return;
+    function onStart(e) {
+      if (e.target.closest('button,input,textarea,a,.feed-dropdown')) return;
+      const t = e.touches ? e.touches[0] : e;
+      _swipeStartX = t.clientX; _swipeStartY = t.clientY;
+      _swipeDragging = true; _swipeDx = 0;
+      card.style.transition = 'none';
+    }
+    function onMove(e) {
+      if (!_swipeDragging) return;
+      const t = e.touches ? e.touches[0] : e;
+      const dx = t.clientX - _swipeStartX;
+      const dy = t.clientY - _swipeStartY;
+      if (Math.abs(dy) > Math.abs(dx) + 10) { _swipeDragging = false; card.style.transition = ''; return; }
+      _swipeDx = dx;
+      card.style.transform = `translateX(${dx}px) rotate(${dx / 18}deg)`;
+      // LIKE/NOPE labels
+      const op = Math.min(Math.abs(dx) / 60, 1);
+      const ll = document.getElementById('swipe-like-label');
+      const nl = document.getElementById('swipe-nope-label');
+      if (ll) ll.style.opacity = dx > 10 ? op : '0';
+      if (nl) nl.style.opacity = dx < -10 ? op : '0';
+      if (e.cancelable) e.preventDefault();
+    }
+    function onEnd() {
+      if (!_swipeDragging) return;
+      _swipeDragging = false;
+      card.style.transition = 'transform 0.35s cubic-bezier(0.4,0,0.2,1),opacity 0.35s';
+      const ll = document.getElementById('swipe-like-label');
+      const nl = document.getElementById('swipe-nope-label');
+      if (ll) ll.style.opacity = '0';
+      if (nl) nl.style.opacity = '0';
+      if (_swipeDx > 80) {
+        card.style.transform = 'translateX(150%) rotate(22deg)';
+        card.style.opacity = '0';
+        maybeTriggerMatch();
+        setTimeout(() => { feedIdx++; initFeed(); }, 360);
+      } else if (_swipeDx < -80) {
+        card.style.transform = 'translateX(-150%) rotate(-22deg)';
+        card.style.opacity = '0';
+        setTimeout(() => { feedIdx++; initFeed(); }, 360);
+      } else {
+        card.style.transform = 'translateX(0) rotate(0deg)';
+      }
+    }
+    card.addEventListener('touchstart', onStart, { passive: true });
+    card.addEventListener('touchmove', onMove, { passive: false });
+    card.addEventListener('touchend', onEnd);
+    card.addEventListener('mousedown', onStart);
+    document.addEventListener('mousemove', e => { if (_swipeDragging) onMove(e); });
+    document.addEventListener('mouseup', () => { if (_swipeDragging) onEnd(); });
+  }
+
+  // ── Match modal ─────────────────────────────────────────────────────────────
+  let _likeCount = 0;
+  let _matchProfile = null;
+
+  function maybeTriggerMatch() {
+    _likeCount++;
+    // Show match modal every 3rd like
+    if (_likeCount % 3 === 0 && feedIdx < feedProfiles.length) {
+      _matchProfile = feedProfiles[feedIdx];
+      showMatchModal(_matchProfile);
+    }
+  }
+
+  function showMatchModal(profile) {
+    document.getElementById('match-name').textContent = profile.name;
+    document.getElementById('match-photo').src = profile.photo;
+    const modal = document.getElementById('match-modal');
+    modal.style.display = 'flex';
+    spawnConfetti();
+  }
+
+  function closeMatchModal() {
+    document.getElementById('match-modal').style.display = 'none';
+    document.getElementById('match-confetti').innerHTML = '';
+  }
+
+  function openMatchChat() {
+    closeMatchModal();
+    if (_matchProfile) openChat(_matchProfile.name, _matchProfile.age || 24, _matchProfile.photo, _matchProfile.photoPos || 'center top');
+  }
+
+  function spawnConfetti() {
+    const container = document.getElementById('match-confetti');
+    container.innerHTML = '';
+    const colors = ['#335CFF','#8A5BFF','#FF4D6A','#22C55E','#FFD600','#fff'];
+    for (let i = 0; i < 60; i++) {
+      const el = document.createElement('div');
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      const size = 6 + Math.random() * 8;
+      const x = Math.random() * 100;
+      const delay = Math.random() * 0.8;
+      const dur = 1.5 + Math.random() * 1.5;
+      el.style.cssText = `position:absolute;top:-20px;left:${x}%;width:${size}px;height:${size}px;background:${color};border-radius:${Math.random()>0.5?'50%':'2px'};opacity:0.9;animation:confettiFall ${dur}s ${delay}s ease-in forwards;`;
+      container.appendChild(el);
+    }
+  }
+
+  // ── Photo viewer ────────────────────────────────────────────────────────────
+  function openPhotoViewer(src) {
+    document.getElementById('photo-viewer-img').src = src;
+    document.getElementById('photo-viewer').style.display = 'flex';
+  }
+  function closePhotoViewer() {
+    document.getElementById('photo-viewer').style.display = 'none';
+  }
+
   function initFeed() {
     if (feedIdx >= feedProfiles.length) {
       document.getElementById('feed-stack').innerHTML = `
@@ -2770,6 +2934,7 @@
     }
     const stack = document.getElementById('feed-stack');
     stack.innerHTML = `<div id="feed-card-current" style="position:absolute;inset:0;overflow-y:auto;-webkit-overflow-scrolling:touch;transition:transform 0.35s cubic-bezier(0.4,0,0.2,1),opacity 0.35s;">${renderFeedCard(feedProfiles[feedIdx])}</div>`;
+    attachSwipe(document.getElementById('feed-card-current'));
   }
 
   function feedPass() {
@@ -2851,12 +3016,12 @@
 
   function sendLike() {
     document.getElementById('like-sheet-modal').style.display = 'none';
-    // Animate out and advance
     const card = document.getElementById('feed-card-current');
     if (card) {
       card.style.transform = 'translateX(110%) rotate(6deg)';
       card.style.opacity = '0';
     }
+    maybeTriggerMatch();
     setTimeout(() => { feedIdx++; initFeed(); }, 320);
   }
 
