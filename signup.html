@@ -608,19 +608,20 @@
     return true;
   }
 
-  // SECURITY: this must be the PUBLIC "anon" key (Supabase dashboard → Settings
-  // → API). Never put the service_role key in client-side code. Pair with an
-  // RLS policy that allows INSERT only on the tables below.
+  // SECURITY: this must be a PUBLIC key — the sb_publishable_… key (or legacy
+  // anon key). Never put a secret/service_role key in client-side code. Pair
+  // with an RLS policy that allows INSERT only on the tables below.
   const SUPA_URL = 'https://iahnrlgeivjzmzzqloan.supabase.co';
-  const SUPA_ANON_KEY = 'REPLACE_WITH_SUPABASE_ANON_KEY';
+  const SUPA_PUBLIC_KEY = 'sb_publishable_9RNub_FrmdEjav-NCaf4Ew_stwXfalC';
 
   async function supaInsert(table, payload) {
     return fetch(`${SUPA_URL}/rest/v1/${table}`, {
       method: 'POST',
       headers: {
+        // publishable keys go in the apikey header only — no Authorization
+        // header, which is reserved for user JWTs
         'Content-Type': 'application/json',
-        'apikey': SUPA_ANON_KEY,
-        'Authorization': `Bearer ${SUPA_ANON_KEY}`,
+        'apikey': SUPA_PUBLIC_KEY,
         'Prefer': 'return=minimal',
       },
       body: JSON.stringify(payload),
